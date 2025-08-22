@@ -11,7 +11,6 @@ import {
   Calendar,
   User,
   CheckCircle2,
-  Sparkles,
   Send,
   UserCheck,
   MessageSquare,
@@ -211,19 +210,19 @@ export function AddApplicationForm({
                 <SelectContent>
                   <SelectItem value="skickat">
                     <div className="flex items-center gap-2">
-                      <Send size={14} className="text-blue-500" />
+                      <Send size={14} className="text-yellow-600" />
                       Skickat
                     </div>
                   </SelectItem>
                   <SelectItem value="antagen">
                     <div className="flex items-center gap-2">
-                      <UserCheck size={14} className="text-green-500" />
+                      <UserCheck size={14} className="text-green-600" />
                       Antagen
                     </div>
                   </SelectItem>
                   <SelectItem value="besvarat">
                     <div className="flex items-center gap-2">
-                      <MessageSquare size={14} className="text-purple-500" />
+                      <MessageSquare size={14} className="text-blue-600" />
                       Besvarat
                     </div>
                   </SelectItem>
@@ -233,7 +232,7 @@ export function AddApplicationForm({
 
             <Button
               type="submit"
-              className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl group"
+              className="w-full h-12 bg-slate-900 hover:bg-slate-800 transition-all duration-200 shadow-lg hover:shadow-xl"
               disabled={!isFormValid || isSubmitting}
             >
               {isSubmitting ? (
@@ -242,10 +241,7 @@ export function AddApplicationForm({
                   Lägger till...
                 </div>
               ) : (
-                <div className="flex items-center gap-2">
-                  <Sparkles size={18} className="group-hover:animate-pulse" />
-                  Lägg till ansökan
-                </div>
+                "Lägg till ansökan"
               )}
             </Button>
           </form>
