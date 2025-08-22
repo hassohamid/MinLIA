@@ -1,6 +1,11 @@
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { FileText, CheckCircle, ChartColumnDecreasing } from "lucide-react";
+import {
+  FileText,
+  CheckCircle,
+  ChartColumnDecreasing,
+  Bookmark,
+  MousePointer2,
+} from "lucide-react";
 
 interface Application {
   id: number;
@@ -24,13 +29,26 @@ export default function Hero({ applications }: HeroProps) {
   return (
     <div className="flex justify-between  gap-2 pt-10 relative">
       <div className="absolute h-60 w-full bg-neutral-100/5 -z-22 blur-3xl rounded-full"></div>
-      <div className="p-6 mt-10  border-l-5 border-blue-700 rounded-xl ">
+      <div className="p-6 mt-10  border-l-5 border-blue-700 rounded-xl relative">
         <h1 className="text-6xl font-bold tracking-tight   ">
           Din LIA-koll<span className="text-green-300">.</span>
         </h1>
         <h1 className="text-muted-foreground font-medium  ">
           Samla och följ dina LIA-ansökningar på ett ställe.
         </h1>
+
+        <div className="mt-6 space-y-3">
+          <div className="flex items-center gap-2 text-blue-600">
+            <Bookmark size={18} className="fill-current" />
+            <span className="text-sm font-medium">Organiserat & enkelt</span>
+          </div>
+          <div className="flex items-center gap-2 text-amber-600">
+            <MousePointer2 size={18} className="fill-current" />
+            <span className="text-sm font-medium">
+              Logga in för att spara dina listor
+            </span>
+          </div>
+        </div>
       </div>
       <Card className="hidden lg:flex lg:container lg:max-w-lg flex-col justify-center p-8 relative bg-background/50 backdrop-blur-sm border-border/50">
         <div className="flex items-center justify-between mb-6">
