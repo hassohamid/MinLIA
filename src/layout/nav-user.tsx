@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { logout } from "@/lib/auth-actions";
 import type { User } from "@supabase/supabase-js";
 import { ModeToggle } from "@/components/ui/mode-toggle";
+import Link from "next/link";
 
 export function NavUser({ user }: { user: User }) {
   return (
@@ -79,9 +80,11 @@ export function NavUser({ user }: { user: User }) {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <IconUserCircle />
-            Profil
+          <DropdownMenuItem asChild>
+            <Link href="/profile">
+              <IconUserCircle />
+              Profil
+            </Link>
           </DropdownMenuItem>
 
           <ModeToggle />
