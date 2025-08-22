@@ -110,6 +110,12 @@ export default function ApplicationList({
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [applicationToDelete, setApplicationToDelete] =
     useState<Application | null>(null);
+  const [heartAnimations, setHeartAnimations] = useState<{
+    [key: string]: boolean;
+  }>({});
+  const [floatingHearts, setFloatingHearts] = useState<{
+    [key: string]: boolean;
+  }>({});
   const itemsPerPage = 10;
 
   // Filter and sort applications
@@ -180,6 +186,25 @@ export default function ApplicationList({
   };
 
   const toggleFavorite = (id: number) => {
+    // Trigger heart animation
+    setHeartAnimations((prev) => ({ ...prev, [id]: true }));
+
+    // Check if we're adding to favorites to trigger floating hearts
+    const app = applications.find((app) => app.id === id);
+    if (app && !app.isFavorite) {
+      setFloatingHearts((prev) => ({ ...prev, [id]: true }));
+
+      // Remove floating hearts after animation
+      setTimeout(() => {
+        setFloatingHearts((prev) => ({ ...prev, [id]: false }));
+      }, 1000);
+    }
+
+    // Remove heart animation after duration
+    setTimeout(() => {
+      setHeartAnimations((prev) => ({ ...prev, [id]: false }));
+    }, 600);
+
     setApplications((prev: Application[]) =>
       prev.map((app: Application) =>
         app.id === id ? { ...app, isFavorite: !app.isFavorite } : app
@@ -255,15 +280,43 @@ export default function ApplicationList({
 
   if (applications.length === 0) {
     return (
-      <Card>
-        <CardContent className="flex flex-col items-center justify-center py-12">
-          <Building2 size={48} className="text-muted-foreground mb-4" />
-          <h3 className="text-lg font-semibold mb-2">Inga ansökningar än</h3>
-          <p className="text-muted-foreground text-center">
-            Lägg till din första LIA-ansökan för att komma igång!
-          </p>
-        </CardContent>
-      </Card>
+      <>
+        <style>{`
+          @keyframes floatHeart0 {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+            100% { transform: translate(-50%, -80px) rotate(15deg) scale(1); opacity: 0; }
+          }
+          @keyframes floatHeart1 {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+            100% { transform: translate(-20px, -60px) rotate(-10deg) scale(1); opacity: 0; }
+          }
+          @keyframes floatHeart2 {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+            100% { transform: translate(-70px, -70px) rotate(25deg) scale(1); opacity: 0; }
+          }
+          @keyframes floatHeart3 {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+            100% { transform: translate(-30px, -75px) rotate(-20deg) scale(1); opacity: 0; }
+          }
+          @keyframes floatHeart4 {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+            100% { transform: translate(-60px, -65px) rotate(30deg) scale(1); opacity: 0; }
+          }
+          @keyframes floatHeart5 {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+            100% { transform: translate(-40px, -85px) rotate(-15deg) scale(1); opacity: 0; }
+          }
+        `}</style>
+        <Card>
+          <CardContent className="flex flex-col items-center justify-center py-12">
+            <Building2 size={48} className="text-muted-foreground mb-4" />
+            <h3 className="text-lg font-semibold mb-2">Inga ansökningar än</h3>
+            <p className="text-muted-foreground text-center">
+              Lägg till din första LIA-ansökan för att komma igång!
+            </p>
+          </CardContent>
+        </Card>
+      </>
     );
   }
 
@@ -304,236 +357,315 @@ export default function ApplicationList({
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Building2 size={20} />
-          Dina ansökningar ({filteredAndSortedApplications.length})
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <FilterBar
-          onSortChange={handleSortChange}
-          onStatusFilter={handleStatusFilter}
-          onFavoriteFilter={handleFavoriteFilter}
-          onSearchChange={handleSearchChange}
-          currentSort={sortBy}
-          currentStatusFilter={statusFilter}
-          showFavoritesOnly={showFavoritesOnly}
-          favoriteCount={favoriteCount}
-          searchQuery={searchQuery}
-        />
+    <>
+      <style>{`
+        @keyframes floatHeart0 {
+          0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+          100% { transform: translate(-50%, -80px) rotate(15deg) scale(1); opacity: 0; }
+        }
+        @keyframes floatHeart1 {
+          0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+          100% { transform: translate(-20px, -60px) rotate(-10deg) scale(1); opacity: 0; }
+        }
+        @keyframes floatHeart2 {
+          0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+          100% { transform: translate(-70px, -70px) rotate(25deg) scale(1); opacity: 0; }
+        }
+        @keyframes floatHeart3 {
+          0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+          100% { transform: translate(-30px, -75px) rotate(-20deg) scale(1); opacity: 0; }
+        }
+        @keyframes floatHeart4 {
+          0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+          100% { transform: translate(-60px, -65px) rotate(30deg) scale(1); opacity: 0; }
+        }
+        @keyframes floatHeart5 {
+          0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 1; }
+          100% { transform: translate(-40px, -85px) rotate(-15deg) scale(1); opacity: 0; }
+        }
+      `}</style>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Building2 size={20} />
+            Dina ansökningar ({filteredAndSortedApplications.length})
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <FilterBar
+            onSortChange={handleSortChange}
+            onStatusFilter={handleStatusFilter}
+            onFavoriteFilter={handleFavoriteFilter}
+            onSearchChange={handleSearchChange}
+            currentSort={sortBy}
+            currentStatusFilter={statusFilter}
+            showFavoritesOnly={showFavoritesOnly}
+            favoriteCount={favoriteCount}
+            searchQuery={searchQuery}
+          />
 
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[250px]">
-                <div className="flex items-center gap-2">
-                  <Building2 size={16} />
-                  Företag
-                </div>
-              </TableHead>
-              <TableHead>
-                <div className="flex items-center gap-2">
-                  <User size={16} />
-                  Roll
-                </div>
-              </TableHead>
-              <TableHead>
-                <div className="flex items-center gap-2">
-                  <Calendar size={16} />
-                  Ansökningsdatum
-                </div>
-              </TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="w-[50px]"></TableHead>
-              <TableHead className="w-[50px]"></TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {currentApplications.map((application) => (
-              <TableRow key={application.id} className="hover:bg-muted/50">
-                <TableCell className="font-medium">
-                  {application.companyName}
-                </TableCell>
-                <TableCell>{application.role}</TableCell>
-                <TableCell>
-                  {new Date(application.applicationDate).toLocaleDateString(
-                    "sv-SE"
-                  )}
-                </TableCell>
-                <TableCell>{getStatusBadge(application.status)}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => toggleFavorite(application.id)}
-                    className="p-1 h-8 w-8"
-                  >
-                    <Heart
-                      size={16}
-                      className={`transition-colors ${
-                        application.isFavorite
-                          ? "fill-red-500 text-red-500"
-                          : "text-gray-400 hover:text-red-400"
-                      }`}
-                    />
-                  </Button>
-                </TableCell>
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                        <MoreHorizontal size={16} />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48">
-                      <DropdownMenuLabel>Åtgärder</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
+          <div className="overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[250px]">
+                    <div className="flex items-center gap-2">
+                      <Building2 size={16} />
+                      Företag
+                    </div>
+                  </TableHead>
+                  <TableHead>
+                    <div className="flex items-center gap-2">
+                      <User size={16} />
+                      Roll
+                    </div>
+                  </TableHead>
+                  <TableHead>
+                    <div className="flex items-center gap-2">
+                      <Calendar size={16} />
+                      Ansökningsdatum
+                    </div>
+                  </TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="w-[50px]"></TableHead>
+                  <TableHead className="w-[50px]"></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {currentApplications.map((application) => (
+                  <TableRow key={application.id} className="hover:bg-muted/50">
+                    <TableCell className="font-medium">
+                      {application.companyName}
+                    </TableCell>
+                    <TableCell>{application.role}</TableCell>
+                    <TableCell>
+                      {new Date(application.applicationDate).toLocaleDateString(
+                        "sv-SE"
+                      )}
+                    </TableCell>
+                    <TableCell>{getStatusBadge(application.status)}</TableCell>
+                    <TableCell className="relative overflow-hidden">
+                      <div className="relative">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toggleFavorite(application.id)}
+                          className="p-1 h-8 w-8 relative overflow-visible"
+                        >
+                          <Heart
+                            size={16}
+                            className={`transition-all duration-300 ${
+                              application.isFavorite
+                                ? "fill-red-500 text-red-500"
+                                : "text-gray-400 hover:text-red-400"
+                            } ${
+                              heartAnimations[application.id]
+                                ? "animate-bounce scale-125"
+                                : ""
+                            }`}
+                            style={{
+                              filter: heartAnimations[application.id]
+                                ? "drop-shadow(0 0 8px rgba(239, 68, 68, 0.6))"
+                                : "",
+                            }}
+                          />
 
-                      {/* Status ändringar */}
-                      <DropdownMenuItem
-                        onClick={() =>
-                          updateApplicationStatus(application.id, "skickat")
-                        }
-                        disabled={application.status === "skickat"}
-                        className="flex items-center gap-2"
-                      >
-                        <Send size={14} className="text-yellow-600" />
-                        Markera som skickat
-                      </DropdownMenuItem>
+                          {/* Pulse effect on click */}
+                          {heartAnimations[application.id] && (
+                            <div className="absolute inset-0 rounded-full bg-red-500/20 animate-ping" />
+                          )}
+                        </Button>
 
-                      <DropdownMenuItem
-                        onClick={() =>
-                          updateApplicationStatus(application.id, "besvarat")
-                        }
-                        disabled={application.status === "besvarat"}
-                        className="flex items-center gap-2"
-                      >
-                        <MessageSquare size={14} className="text-blue-600" />
-                        Markera som besvarat
-                      </DropdownMenuItem>
+                        {/* Floating hearts animation */}
+                        {floatingHearts[application.id] && (
+                          <div className="absolute inset-0 pointer-events-none">
+                            {[...Array(6)].map((_, i) => (
+                              <div
+                                key={i}
+                                className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+                                style={{
+                                  animation: `floatHeart${i} 1s ease-out forwards`,
+                                  animationDelay: `${i * 100}ms`,
+                                }}
+                              >
+                                <Heart
+                                  size={12}
+                                  className="fill-red-500 text-red-500"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                          >
+                            <MoreHorizontal size={16} />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="w-48">
+                          <DropdownMenuLabel>Åtgärder</DropdownMenuLabel>
+                          <DropdownMenuSeparator />
 
-                      <DropdownMenuItem
-                        onClick={() =>
-                          updateApplicationStatus(application.id, "antagen")
-                        }
-                        disabled={application.status === "antagen"}
-                        className="flex items-center gap-2"
-                      >
-                        <UserCheck size={14} className="text-green-600" />
-                        Markera som antagen
-                      </DropdownMenuItem>
+                          {/* Status ändringar */}
+                          <DropdownMenuItem
+                            onClick={() =>
+                              updateApplicationStatus(application.id, "skickat")
+                            }
+                            disabled={application.status === "skickat"}
+                            className="flex items-center gap-2"
+                          >
+                            <Send size={14} className="text-yellow-600" />
+                            Markera som skickat
+                          </DropdownMenuItem>
 
-                      <DropdownMenuSeparator />
+                          <DropdownMenuItem
+                            onClick={() =>
+                              updateApplicationStatus(
+                                application.id,
+                                "besvarat"
+                              )
+                            }
+                            disabled={application.status === "besvarat"}
+                            className="flex items-center gap-2"
+                          >
+                            <MessageSquare
+                              size={14}
+                              className="text-blue-600"
+                            />
+                            Markera som besvarat
+                          </DropdownMenuItem>
 
-                      {/* Ta bort */}
-                      <DropdownMenuItem
-                        onClick={() => handleDeleteClick(application)}
-                        className="flex items-center gap-2 text-red-600 focus:text-red-600"
-                      >
-                        <Trash2 size={14} />
-                        Ta bort ansökan
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                          <DropdownMenuItem
+                            onClick={() =>
+                              updateApplicationStatus(application.id, "antagen")
+                            }
+                            disabled={application.status === "antagen"}
+                            className="flex items-center gap-2"
+                          >
+                            <UserCheck size={14} className="text-green-600" />
+                            Markera som antagen
+                          </DropdownMenuItem>
 
-        {totalPages > 1 && (
-          <div className="mt-6">
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    onClick={() =>
-                      handlePageChange(Math.max(1, currentPage - 1))
-                    }
-                    className={
-                      currentPage === 1
-                        ? "pointer-events-none opacity-50"
-                        : "cursor-pointer"
-                    }
-                  />
-                </PaginationItem>
+                          <DropdownMenuSeparator />
 
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (page) => (
-                    <PaginationItem key={page}>
-                      <PaginationLink
-                        onClick={() => handlePageChange(page)}
-                        isActive={currentPage === page}
-                        className="cursor-pointer"
-                      >
-                        {page}
-                      </PaginationLink>
-                    </PaginationItem>
-                  )
-                )}
-
-                <PaginationItem>
-                  <PaginationNext
-                    onClick={() =>
-                      handlePageChange(Math.min(totalPages, currentPage + 1))
-                    }
-                    className={
-                      currentPage === totalPages
-                        ? "pointer-events-none opacity-50"
-                        : "cursor-pointer"
-                    }
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
+                          {/* Ta bort */}
+                          <DropdownMenuItem
+                            onClick={() => handleDeleteClick(application)}
+                            className="flex items-center gap-2 text-red-600 focus:text-red-600"
+                          >
+                            <Trash2 size={14} />
+                            Ta bort ansökan
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
-        )}
-      </CardContent>
 
-      {/* Bekräftelsedialog för borttagning */}
-      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Trash2 size={20} className="text-red-500" />
-              Ta bort ansökan
-            </DialogTitle>
-            <DialogDescription>
-              Är du säker på att du vill ta bort ansökningen till{" "}
-              <span className="font-semibold">
-                {applicationToDelete?.companyName}
-              </span>{" "}
-              för rollen{" "}
-              <span className="font-semibold">{applicationToDelete?.role}</span>
-              ?
-              <br />
-              <br />
-              <span className="text-red-600 text-sm">
-                Denna åtgärd kan inte ångras.
-              </span>
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="gap-2 ">
-            <Button
-              variant="outline"
-              onClick={cancelDelete}
-              className="w-full sm:w-auto"
-            >
-              Avbryt
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={confirmDelete}
-              className="w-full sm:w-auto"
-            >
-              <Trash2 size={16} className="mr-2" />
-              Ta bort
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </Card>
+          {totalPages > 1 && (
+            <div className="mt-6">
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={() =>
+                        handlePageChange(Math.max(1, currentPage - 1))
+                      }
+                      className={
+                        currentPage === 1
+                          ? "pointer-events-none opacity-50"
+                          : "cursor-pointer"
+                      }
+                    />
+                  </PaginationItem>
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (page) => (
+                      <PaginationItem key={page}>
+                        <PaginationLink
+                          onClick={() => handlePageChange(page)}
+                          isActive={currentPage === page}
+                          className="cursor-pointer"
+                        >
+                          {page}
+                        </PaginationLink>
+                      </PaginationItem>
+                    )
+                  )}
+
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={() =>
+                        handlePageChange(Math.min(totalPages, currentPage + 1))
+                      }
+                      className={
+                        currentPage === totalPages
+                          ? "pointer-events-none opacity-50"
+                          : "cursor-pointer"
+                      }
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            </div>
+          )}
+        </CardContent>
+
+        {/* Bekräftelsedialog för borttagning */}
+        <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <Trash2 size={20} className="text-red-500" />
+                Ta bort ansökan
+              </DialogTitle>
+              <DialogDescription>
+                Är du säker på att du vill ta bort ansökningen till{" "}
+                <span className="font-semibold">
+                  {applicationToDelete?.companyName}
+                </span>{" "}
+                för rollen{" "}
+                <span className="font-semibold">
+                  {applicationToDelete?.role}
+                </span>
+                ?
+                <br />
+                <br />
+                <span className="text-red-600 text-sm">
+                  Denna åtgärd kan inte ångras.
+                </span>
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="gap-2 ">
+              <Button
+                variant="outline"
+                onClick={cancelDelete}
+                className="w-full sm:w-auto"
+              >
+                Avbryt
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={confirmDelete}
+                className="w-full sm:w-auto"
+              >
+                <Trash2 size={16} className="mr-2" />
+                Ta bort
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </Card>
+    </>
   );
 }
