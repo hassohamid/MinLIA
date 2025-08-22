@@ -13,7 +13,18 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-export function AddApplicationForm() {
+interface AddApplicationFormProps {
+  onAddApplication: (application: {
+    companyName: string;
+    role: string;
+    applicationDate: string;
+    status: string;
+  }) => void;
+}
+
+export function AddApplicationForm({
+  onAddApplication,
+}: AddApplicationFormProps) {
   const [formData, setFormData] = useState({
     companyName: "",
     applicationDate: "",
@@ -29,8 +40,9 @@ export function AddApplicationForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // TODO: Add logic to save to Supabase
+
+    // Call the parent function to add the application
+    onAddApplication(formData);
 
     // Reset form
     setFormData({
@@ -125,7 +137,7 @@ export function AddApplicationForm() {
                   <SelectValue placeholder="Välj status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="sökande">Sökande</SelectItem>
+                  <SelectItem value="skickat">Skickat</SelectItem>
                   <SelectItem value="antagen">Antagen</SelectItem>
                   <SelectItem value="besvarat">Besvarat</SelectItem>
                 </SelectContent>

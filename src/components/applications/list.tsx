@@ -38,52 +38,29 @@ import {
 import { Separator } from "../ui/separator";
 import SearchBar from "./search-bar";
 
-// Mock data - ersätt med riktig data från Supabase senare
-const mockApplications = [
-  {
-    id: 1,
-    companyName: "TechCorp AB",
-    role: "Frontend Developer",
-    applicationDate: "2025-01-15",
-    status: "sökande",
-    isFavorite: false,
-  },
-  {
-    id: 2,
-    companyName: "StartupXYZ",
-    role: "UX Designer",
-    applicationDate: "2025-01-12",
-    status: "antagen",
-    isFavorite: true,
-  },
-  {
-    id: 3,
-    companyName: "BigCompany Inc",
-    role: "Backend Developer",
-    applicationDate: "2025-01-10",
-    status: "besvarat",
-    isFavorite: false,
-  },
-  // Lägg till fler mock-data för att testa pagination
-  ...Array.from({ length: 15 }, (_, i) => ({
-    id: i + 4,
-    companyName: `Företag ${i + 4}`,
-    role: `Position ${i + 4}`,
-    applicationDate: `2025-01-${String(9 - (i % 9)).padStart(2, "0")}`,
-    status: ["sökande", "antagen", "besvarat"][i % 3],
-    isFavorite: i % 4 === 0, // Varje fjärde är favorit
-  })),
-];
+interface Application {
+  id: number;
+  companyName: string;
+  role: string;
+  applicationDate: string;
+  status: string;
+  isFavorite: boolean;
+}
+
+interface ApplicationListProps {
+  applications: Application[];
+  setApplications: React.Dispatch<React.SetStateAction<Application[]>>;
+}
 
 const getStatusBadge = (status: string) => {
   switch (status) {
-    case "sökande":
+    case "skickat":
       return (
         <Badge
           variant="outline"
           className="bg-yellow-50 text-yellow-700 border-yellow-200"
         >
-          Sökande
+          Skickat
         </Badge>
       );
     case "antagen":
@@ -109,9 +86,11 @@ const getStatusBadge = (status: string) => {
   }
 };
 
-export default function ApplicationList() {
+export default function ApplicationList({
+  applications,
+  setApplications,
+}: ApplicationListProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [applications, setApplications] = useState(mockApplications);
   const [sortBy, setSortBy] = useState("company-asc");
   const [statusFilter, setStatusFilter] = useState("all");
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
@@ -177,15 +156,17 @@ export default function ApplicationList() {
     endIndex
   );
 
-  const favoriteCount = applications.filter((app) => app.isFavorite).length;
+  const favoriteCount = applications.filter(
+    (app: Application) => app.isFavorite
+  ).length;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
   const toggleFavorite = (id: number) => {
-    setApplications((prev) =>
-      prev.map((app) =>
+    setApplications((prev: Application[]) =>
+      prev.map((app: Application) =>
         app.id === id ? { ...app, isFavorite: !app.isFavorite } : app
       )
     );
@@ -272,7 +253,7 @@ export default function ApplicationList() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">Alla status</SelectItem>
-                  <SelectItem value="sökande">Sökande</SelectItem>
+                  <SelectItem value="skickat">Skickat</SelectItem>
                   <SelectItem value="antagen">Antagen</SelectItem>
                   <SelectItem value="besvarat">Besvarat</SelectItem>
                 </SelectContent>
@@ -369,7 +350,7 @@ export default function ApplicationList() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Alla status</SelectItem>
-                <SelectItem value="sökande">Sökande</SelectItem>
+                <SelectItem value="skickat">Skickat</SelectItem>
                 <SelectItem value="antagen">Antagen</SelectItem>
                 <SelectItem value="besvarat">Besvarat</SelectItem>
               </SelectContent>

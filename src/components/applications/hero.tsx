@@ -4,7 +4,8 @@ import { FileText, CheckCircle, ChartColumnDecreasing } from "lucide-react";
 
 export default function Hero() {
   return (
-    <div className="flex justify-between  gap-2 pt-10">
+    <div className="flex justify-between  gap-2 pt-10 relative">
+      <div className="absolute h-60 w-full bg-neutral-100/5 -z-22 blur-3xl rounded-full"></div>
       <div className="p-6 mt-10  border-l-5 border-blue-700 rounded-xl ">
         <h1 className="text-6xl font-bold tracking-tight   ">
           Din LIA-koll<span className="text-green-300">.</span>
