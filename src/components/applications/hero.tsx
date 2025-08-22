@@ -2,7 +2,25 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { FileText, CheckCircle, ChartColumnDecreasing } from "lucide-react";
 
-export default function Hero() {
+interface Application {
+  id: number;
+  companyName: string;
+  role: string;
+  applicationDate: string;
+  status: string;
+  isFavorite: boolean;
+}
+
+interface HeroProps {
+  applications: Application[];
+}
+
+export default function Hero({ applications }: HeroProps) {
+  const totalApplications = applications.length;
+  const answeredApplications = applications.filter(
+    (app) => app.status === "besvarat"
+  ).length;
+
   return (
     <div className="flex justify-between  gap-2 pt-10 relative">
       <div className="absolute h-60 w-full bg-neutral-100/5 -z-22 blur-3xl rounded-full"></div>
@@ -26,10 +44,11 @@ export default function Hero() {
         <div className="flex gap-6 relative">
           <Badge className="flex items-center gap-3 px-6 py-4 text-sm  tracking-tight bg-blue-500 ">
             <FileText className="!size-5" />
-            55 ansökningar
+            {totalApplications} ansökningar
           </Badge>
           <Badge className="flex items-center gap-3 px-6 py-4 text-sm  tracking-tight bg-lime-500 ">
-            <CheckCircle className="!size-5" />2 besvarade
+            <CheckCircle className="!size-5" />
+            {answeredApplications} besvarade
           </Badge>
           <div className="absolute h-20 w-50 bg-blue-200 -z-22 blur-3xl rounded-full"></div>
           <div className="absolute right-0 h-30 w-30 bg-lime-300 -z-22 blur-3xl rounded-full"></div>

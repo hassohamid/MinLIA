@@ -18,25 +18,9 @@ import {
 } from "@/components/ui/pagination";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Building2,
-  Calendar,
-  User,
-  MoreHorizontal,
-  Heart,
-  Filter,
-  ArrowUpDown,
-} from "lucide-react";
+import { Building2, Calendar, User, MoreHorizontal, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "../ui/separator";
-import SearchBar from "./search-bar";
+import FilterBar from "./filter-bar";
 
 interface Application {
   id: number;
@@ -217,91 +201,20 @@ export default function ApplicationList({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {/* Filter Bar */}
-          <div className="flex flex-wrap items-center gap-4 mb-4">
-            {/* Sortering */}
-            <div className="flex items-center gap-2">
-              <ArrowUpDown size={16} className="text-muted-foreground" />
-              <Select value={sortBy} onValueChange={handleSortChange}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Sortera efter" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="company-asc">Företag A-Ö</SelectItem>
-                  <SelectItem value="company-desc">Företag Ö-A</SelectItem>
-                  <SelectItem value="date-desc">Senaste datum</SelectItem>
-                  <SelectItem value="date-asc">Äldsta datum</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Status filter */}
-            <div className="flex items-center gap-2">
-              <Filter size={16} className="text-muted-foreground" />
-              <Select value={statusFilter} onValueChange={handleStatusFilter}>
-                <SelectTrigger className="w-[150px]">
-                  <SelectValue placeholder="Filtrera status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Status</SelectItem>
-                  <SelectItem value="skickat">Skickat</SelectItem>
-                  <SelectItem value="antagen">Antagen</SelectItem>
-                  <SelectItem value="besvarat">Besvarat</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Favoriter knapp */}
-            <Button
-              variant={showFavoritesOnly ? "default" : "outline"}
-              onClick={() => handleFavoriteFilter(!showFavoritesOnly)}
-              className="flex items-center gap-2"
-            >
-              <Heart
-                size={16}
-                className={
-                  showFavoritesOnly ? "fill-white text-white" : "text-red-500"
-                }
-              />
-              Favoriter
-              {favoriteCount > 0 && (
-                <Badge variant="secondary" className="ml-1">
-                  {favoriteCount}
-                </Badge>
-              )}
-            </Button>
-
-            {/* Reset filters */}
-            {(statusFilter !== "all" ||
-              showFavoritesOnly ||
-              searchQuery.trim()) && (
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  handleStatusFilter("all");
-                  handleFavoriteFilter(false);
-                  handleSearchChange("");
-                }}
-                className="text-muted-foreground"
-              >
-                Rensa filter
-              </Button>
-            )}
-          </div>
-
-          {/* Search Bar */}
-          <div className="mb-4">
-            <SearchBar
-              value={searchQuery}
-              onChange={handleSearchChange}
-              placeholder="Sök efter företag eller roll..."
-            />
-          </div>
-
-          <Separator className="mb-6" />
+          <FilterBar
+            onSortChange={handleSortChange}
+            onStatusFilter={handleStatusFilter}
+            onFavoriteFilter={handleFavoriteFilter}
+            onSearchChange={handleSearchChange}
+            currentSort={sortBy}
+            currentStatusFilter={statusFilter}
+            showFavoritesOnly={showFavoritesOnly}
+            favoriteCount={favoriteCount}
+            searchQuery={searchQuery}
+          />
 
           <div className="flex flex-col items-center justify-center py-12">
-            <Filter size={48} className="text-muted-foreground mb-4" />
+            <Building2 size={48} className="text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold mb-2">
               Inga resultat hittades
             </h3>
@@ -323,87 +236,17 @@ export default function ApplicationList({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        {/* Filter Bar */}
-        <div className="flex flex-wrap items-center gap-4 mb-4">
-          {/* Sortering */}
-          <div className="flex items-center gap-2">
-            <ArrowUpDown size={16} className="text-muted-foreground" />
-            <Select value={sortBy} onValueChange={handleSortChange}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Sortera efter" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="company-asc">Företag A-Ö</SelectItem>
-                <SelectItem value="company-desc">Företag Ö-A</SelectItem>
-                <SelectItem value="date-desc">Senaste datum</SelectItem>
-                <SelectItem value="date-asc">Äldsta datum</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Status filter */}
-          <div className="flex items-center gap-2">
-            <Filter size={16} className="text-muted-foreground" />
-            <Select value={statusFilter} onValueChange={handleStatusFilter}>
-              <SelectTrigger className="w-[150px]">
-                <SelectValue placeholder="Filtrera status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Status</SelectItem>
-                <SelectItem value="skickat">Skickat</SelectItem>
-                <SelectItem value="antagen">Antagen</SelectItem>
-                <SelectItem value="besvarat">Besvarat</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Favoriter knapp */}
-          <Button
-            variant={showFavoritesOnly ? "default" : "outline"}
-            onClick={() => handleFavoriteFilter(!showFavoritesOnly)}
-            className="flex items-center gap-2"
-          >
-            <Heart
-              size={16}
-              className={
-                showFavoritesOnly ? "fill-white text-white" : "text-red-500"
-              }
-            />
-            Favoriter
-            {favoriteCount > 0 && (
-              <Badge variant="secondary" className="ml-1">
-                {favoriteCount}
-              </Badge>
-            )}
-          </Button>
-
-          {/* Reset filters */}
-          {(statusFilter !== "all" ||
-            showFavoritesOnly ||
-            searchQuery.trim()) && (
-            <Button
-              variant="ghost"
-              onClick={() => {
-                handleStatusFilter("all");
-                handleFavoriteFilter(false);
-                handleSearchChange("");
-              }}
-              className="text-muted-foreground"
-            >
-              Rensa filter
-            </Button>
-          )}
-        </div>
-
-        <div className="mb-4">
-          <SearchBar
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder="Sök efter företag eller roll..."
-          />
-        </div>
-
-        <Separator className="mb-6" />
+        <FilterBar
+          onSortChange={handleSortChange}
+          onStatusFilter={handleStatusFilter}
+          onFavoriteFilter={handleFavoriteFilter}
+          onSearchChange={handleSearchChange}
+          currentSort={sortBy}
+          currentStatusFilter={statusFilter}
+          showFavoritesOnly={showFavoritesOnly}
+          favoriteCount={favoriteCount}
+          searchQuery={searchQuery}
+        />
 
         <Table>
           <TableHeader>

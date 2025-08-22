@@ -38,7 +38,7 @@ export default function Home() {
       className="container max-w-5xl m-auto 
     px-10 md:px-3 space-y-10"
     >
-      <Hero />
+      <Hero applications={applications} />
       <AddApplicationForm onAddApplication={addApplication} />
       <ApplicationList
         applications={applications}
