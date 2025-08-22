@@ -129,10 +129,21 @@ export function AddApplicationForm({
               <div className="space-y-3 group">
                 <Label
                   htmlFor="companyName"
-                  className="flex items-center gap-2 text-sm font-medium"
+                  className="flex items-center justify-between text-sm font-medium"
                 >
-                  <Building2 size={16} className="text-blue-500" />
-                  Företagsnamn
+                  <div className="flex items-center gap-2">
+                    <Building2 size={16} className="text-blue-500" />
+                    Företagsnamn
+                  </div>
+                  <span
+                    className={`text-xs ${
+                      formData.companyName.length > 20
+                        ? "text-red-500"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {formData.companyName.length}/25
+                  </span>
                 </Label>
                 <div className="relative">
                   <Input
@@ -141,10 +152,14 @@ export function AddApplicationForm({
                     placeholder="t.ex. TechCorp AB"
                     value={formData.companyName}
                     onChange={(e) =>
-                      handleInputChange("companyName", e.target.value)
+                      handleInputChange(
+                        "companyName",
+                        e.target.value.slice(0, 25)
+                      )
                     }
                     className="pl-4 pr-4 h-11 border-muted-foreground/20 focus:border-blue-500 transition-colors bg-background/50"
                     required
+                    maxLength={25}
                   />
                 </div>
               </div>
@@ -175,19 +190,33 @@ export function AddApplicationForm({
             <div className="space-y-3 group">
               <Label
                 htmlFor="role"
-                className="flex items-center gap-2 text-sm font-medium"
+                className="flex items-center justify-between text-sm font-medium"
               >
-                <User size={16} className="text-purple-500" />
-                Roll/Position
+                <div className="flex items-center gap-2">
+                  <User size={16} className="text-purple-500" />
+                  Roll/Position
+                </div>
+                <span
+                  className={`text-xs ${
+                    formData.role.length > 25
+                      ? "text-red-500"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {formData.role.length}/30
+                </span>
               </Label>
               <Input
                 id="role"
                 type="text"
-                placeholder="t.ex. Frontend Developer, UX Designer"
+                placeholder="t.ex. Frontend Developer"
                 value={formData.role}
-                onChange={(e) => handleInputChange("role", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("role", e.target.value.slice(0, 30))
+                }
                 className="h-11 border-muted-foreground/20 focus:border-purple-500 transition-colors bg-background/50"
                 required
+                maxLength={30}
               />
             </div>
 
@@ -232,7 +261,7 @@ export function AddApplicationForm({
 
             <Button
               type="submit"
-              className="w-full h-12 bg-slate-900 hover:bg-slate-800 transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 shadow-lg hover:shadow-xl"
               disabled={!isFormValid || isSubmitting}
             >
               {isSubmitting ? (
