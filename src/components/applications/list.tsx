@@ -217,15 +217,6 @@ export default function ApplicationList({
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {/* Search Bar */}
-          <div className="mb-4">
-            <SearchBar
-              value={searchQuery}
-              onChange={handleSearchChange}
-              placeholder="Sök efter företag eller roll..."
-            />
-          </div>
-
           {/* Filter Bar */}
           <div className="flex flex-wrap items-center gap-4 mb-4">
             {/* Sortering */}
@@ -252,7 +243,7 @@ export default function ApplicationList({
                   <SelectValue placeholder="Filtrera status" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Alla status</SelectItem>
+                  <SelectItem value="all">Status</SelectItem>
                   <SelectItem value="skickat">Skickat</SelectItem>
                   <SelectItem value="antagen">Antagen</SelectItem>
                   <SelectItem value="besvarat">Besvarat</SelectItem>
@@ -296,6 +287,15 @@ export default function ApplicationList({
                 Rensa filter
               </Button>
             )}
+          </div>
+
+          {/* Search Bar */}
+          <div className="mb-4">
+            <SearchBar
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Sök efter företag eller roll..."
+            />
           </div>
 
           <Separator className="mb-6" />
@@ -349,7 +349,7 @@ export default function ApplicationList({
                 <SelectValue placeholder="Filtrera status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Alla status</SelectItem>
+                <SelectItem value="all">Status</SelectItem>
                 <SelectItem value="skickat">Skickat</SelectItem>
                 <SelectItem value="antagen">Antagen</SelectItem>
                 <SelectItem value="besvarat">Besvarat</SelectItem>
