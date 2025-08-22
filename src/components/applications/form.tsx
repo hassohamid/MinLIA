@@ -14,6 +14,7 @@ import {
   Send,
   UserCheck,
   MessageSquare,
+  Loader2,
 } from "lucide-react";
 import {
   Select,
@@ -23,53 +24,28 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { createApplication } from "@/lib/api";
 
-interface AddApplicationFormProps {
-  onAddApplication: (application: {
-    companyName: string;
-    role: string;
-    applicationDate: string;
-    status: string;
-  }) => void;
+export interface ApplicationFormProps {
+  company: string;
+  role: string;
+  status: "skickat" | "besvarat" | "antagen";
+  applied_date: string;
 }
 
-export function AddApplicationForm({
-  onAddApplication,
-}: AddApplicationFormProps) {
-  const [formData, setFormData] = useState({
-    companyName: "",
-    applicationDate: new Date().toISOString().split("T")[0], // Default to today
+export function AddApplicationForm() {
+  const [formData, setFormData] = useState<ApplicationFormProps>({
+    company: "",
+    applied_date: new Date().toISOString().split("T")[0],
     role: "",
-    status: "skickat", // Default status
+    status: "skickat",
   });
 
   const [toggleForm, setToggleForm] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleToggle = () => {
     setToggleForm((prev) => !prev);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate a small delay for better UX
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    // Call the parent function to add the application
-    onAddApplication(formData);
-
-    // Reset form
-    setFormData({
-      companyName: "",
-      applicationDate: new Date().toISOString().split("T")[0],
-      role: "",
-      status: "skickat",
-    });
-
-    setIsSubmitting(false);
-    setToggleForm(false);
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -79,9 +55,28 @@ export function AddApplicationForm({
     }));
   };
 
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await createApplication(formData);
+    } catch (err) {
+    } finally {
+      // setFormData({
+      //   company: "",
+      //   applied_date: new Date().toISOString().split("T")[0],
+      //   role: "",
+      //   status: "skickat",
+      // });
+
+      setLoading(false);
+      // setToggleForm(false);
+    }
+  }
+
   const isFormValid =
-    formData.companyName &&
-    formData.applicationDate &&
+    formData.company &&
+    formData.applied_date &&
     formData.role &&
     formData.status;
 
@@ -137,25 +132,22 @@ export function AddApplicationForm({
                   </div>
                   <span
                     className={`text-xs ${
-                      formData.companyName.length > 20
+                      formData.company.length > 20
                         ? "text-red-500"
                         : "text-muted-foreground"
                     }`}
                   >
-                    {formData.companyName.length}/25
+                    {formData.company.length}/25
                   </span>
                 </Label>
                 <div className="relative">
                   <Input
-                    id="companyName"
+                    id="company"
                     type="text"
                     placeholder="t.ex. TechCorp AB"
-                    value={formData.companyName}
+                    value={formData.company}
                     onChange={(e) =>
-                      handleInputChange(
-                        "companyName",
-                        e.target.value.slice(0, 25)
-                      )
+                      handleInputChange("company", e.target.value.slice(0, 25))
                     }
                     className="pl-4 pr-4 h-11 border-muted-foreground/20 focus:border-blue-500 transition-colors bg-background/50"
                     required
@@ -167,18 +159,18 @@ export function AddApplicationForm({
               {/* Application Date */}
               <div className="space-y-3 group">
                 <Label
-                  htmlFor="applicationDate"
+                  htmlFor="applied_date"
                   className="flex items-center gap-2 text-sm font-medium"
                 >
                   <Calendar size={16} className="text-green-500" />
                   Ansökningsdatum
                 </Label>
                 <Input
-                  id="applicationDate"
+                  id="applied_date"
                   type="date"
-                  value={formData.applicationDate}
+                  value={formData.applied_date}
                   onChange={(e) =>
-                    handleInputChange("applicationDate", e.target.value)
+                    handleInputChange("applied_date", e.target.value)
                   }
                   className="h-11 border-muted-foreground/20 focus:border-green-500 transition-colors bg-background/50"
                   required
@@ -262,11 +254,11 @@ export function AddApplicationForm({
             <Button
               type="submit"
               className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 shadow-lg hover:shadow-xl"
-              disabled={!isFormValid || isSubmitting}
+              disabled={!isFormValid || loading}
             >
-              {isSubmitting ? (
+              {loading ? (
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <Loader2 className="animate-spin" />
                   Lägger till...
                 </div>
               ) : (
