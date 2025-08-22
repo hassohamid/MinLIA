@@ -32,26 +32,30 @@ export default function Hero({ applications }: HeroProps) {
           Samla och följ dina LIA-ansökningar på ett ställe.
         </h1>
       </div>
-      <Card className="hidden lg:flex lg:container lg:max-w-lg items-center justify-center relative bg-accent">
-        <ChartColumnDecreasing
-          strokeWidth={2.2}
-          className="absolute right-5 top-5 "
-        />
+      <Card className="hidden lg:flex lg:container lg:max-w-lg flex-col justify-center p-8 relative bg-background/50 backdrop-blur-sm border-border/50">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-medium text-foreground">Statistik</h2>
+          <ChartColumnDecreasing size={20} className="text-muted-foreground" />
+        </div>
 
-        <h1 className="text-xl font-semibold tracking-tight border-b">
-          Din statistik
-        </h1>
-        <div className="flex gap-6 relative">
-          <Badge className="flex items-center gap-3 px-6 py-4 text-sm  tracking-tight bg-blue-500 ">
-            <FileText className="!size-5" />
-            {totalApplications} ansökningar
-          </Badge>
-          <Badge className="flex items-center gap-3 px-6 py-4 text-sm  tracking-tight bg-lime-500 ">
-            <CheckCircle className="!size-5" />
-            {answeredApplications} besvarade
-          </Badge>
-          <div className="absolute h-20 w-50 bg-blue-200 -z-22 blur-3xl rounded-full"></div>
-          <div className="absolute right-0 h-30 w-30 bg-lime-300 -z-22 blur-3xl rounded-full"></div>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30">
+            <div className="flex items-center gap-3">
+              <FileText size={18} className="text-blue-600" />
+              <span className="text-sm font-medium">Totalt</span>
+            </div>
+            <span className="text-2xl font-semibold">{totalApplications}</span>
+          </div>
+
+          <div className="flex items-center justify-between p-4 rounded-lg bg-muted/30">
+            <div className="flex items-center gap-3">
+              <CheckCircle size={18} className="text-green-600" />
+              <span className="text-sm font-medium">Besvarade</span>
+            </div>
+            <span className="text-2xl font-semibold">
+              {answeredApplications}
+            </span>
+          </div>
         </div>
       </Card>
     </div>
