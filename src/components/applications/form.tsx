@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,6 +26,8 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { createApplication } from "@/lib/api";
+import { createClient } from "@/lib/supabase/client";
+import { signInWithGoogle } from "@/lib/auth-actions";
 
 export interface ApplicationFormProps {
   company: string;
@@ -43,8 +46,33 @@ export function AddApplicationForm() {
 
   const [toggleForm, setToggleForm] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const router = useRouter();
 
-  const handleToggle = () => {
+  useEffect(() => {
+    const checkAuth = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      setAuthLoading(false);
+    };
+    checkAuth();
+  }, []);
+
+  const handleToggle = async () => {
+    // Check if user is authenticated before opening form
+    if (!user) {
+      try {
+        const result = await signInWithGoogle(window.location.origin);
+        if (result?.url) {
+          window.location.href = result.url;
+        }
+      } catch (err) {
+        console.error("Google sign-in failed:", err);
+      }
+      return;
+    }
     setToggleForm((prev) => !prev);
   };
 
@@ -57,11 +85,37 @@ export function AddApplicationForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    
+    // Double-check authentication before submitting
+    if (!user) {
+      try {
+        const result = await signInWithGoogle(window.location.origin);
+        if (result?.url) {
+          window.location.href = result.url;
+        }
+      } catch (err) {
+        console.error("Google sign-in failed:", err);
+      }
+      return;
+    }
+
     setLoading(true);
     const result = await createApplication(formData);
     if (!result.success) {
       if (result.type === "validation") {
         console.error(result.error, result.issues);
+      }
+      if (result.type === "auth") {
+        // Trigger Google OAuth if auth failed
+        try {
+          const authResult = await signInWithGoogle(window.location.origin);
+          if (authResult?.url) {
+            window.location.href = authResult.url;
+          }
+        } catch (err) {
+          console.error("Google sign-in failed:", err);
+        }
+        return;
       }
     } else {
       // Reset form and close on success
