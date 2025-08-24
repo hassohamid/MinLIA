@@ -78,7 +78,7 @@ export default function Hero({
           >
             <div className="flex items-center gap-3">
               <FileText size={18} className="text-blue-600" />
-              <span className="text-sm font-medium">Totalt</span>
+              <span className="text-sm font-medium">Ansökningar</span>
             </div>
             <span className="text-2xl font-semibold">
               {user ? totalApplications : "••"}
