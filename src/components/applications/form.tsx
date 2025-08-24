@@ -294,8 +294,8 @@ export function AddApplicationForm() {
                         <Info size={10} className="text-muted-foreground" />
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent 
-                      side="right" 
+                    <TooltipContent
+                      side="right"
                       className="p-0 border-0 bg-transparent shadow-none"
                       sideOffset={8}
                     >
@@ -303,31 +303,52 @@ export function AddApplicationForm() {
                         <div className="space-y-3">
                           <div className="flex items-start gap-3 p-2 rounded-lg bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800/30">
                             <div className="w-6 h-6 rounded-full bg-yellow-100 dark:bg-yellow-900/50 flex items-center justify-center mt-0.5">
-                              <Send size={12} className="text-yellow-600 dark:text-yellow-400" />
+                              <Send
+                                size={12}
+                                className="text-yellow-600 dark:text-yellow-400"
+                              />
                             </div>
                             <div className="flex-1">
-                              <div className="font-medium text-yellow-800 dark:text-yellow-300 text-xs">SKICKAT</div>
-                              <div className="text-xs text-yellow-700 dark:text-yellow-400 mt-0.5">Ansökan är skickad och väntar på svar</div>
+                              <div className="font-medium text-yellow-800 dark:text-yellow-300 text-xs">
+                                SKICKAT
+                              </div>
+                              <div className="text-xs text-yellow-700 dark:text-yellow-400 mt-0.5">
+                                Ansökan är skickad och väntar på svar
+                              </div>
                             </div>
                           </div>
-                          
+
                           <div className="flex items-start gap-3 p-2 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800/30">
                             <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mt-0.5">
-                              <MessageSquare size={12} className="text-blue-600 dark:text-blue-400" />
+                              <MessageSquare
+                                size={12}
+                                className="text-blue-600 dark:text-blue-400"
+                              />
                             </div>
                             <div className="flex-1">
-                              <div className="font-medium text-blue-800 dark:text-blue-300 text-xs">BESVARAT</div>
-                              <div className="text-xs text-blue-700 dark:text-blue-400 mt-0.5">Företaget har svarat (intervju/avslag)</div>
+                              <div className="font-medium text-blue-800 dark:text-blue-300 text-xs">
+                                BESVARAT
+                              </div>
+                              <div className="text-xs text-blue-700 dark:text-blue-400 mt-0.5">
+                                Företaget har svarat (intervju/avslag)
+                              </div>
                             </div>
                           </div>
-                          
+
                           <div className="flex items-start gap-3 p-2 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800/30">
                             <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center mt-0.5">
-                              <UserCheck size={12} className="text-green-600 dark:text-green-400" />
+                              <UserCheck
+                                size={12}
+                                className="text-green-600 dark:text-green-400"
+                              />
                             </div>
                             <div className="flex-1">
-                              <div className="font-medium text-green-800 dark:text-green-300 text-xs">ANTAGEN</div>
-                              <div className="text-xs text-green-700 dark:text-green-400 mt-0.5">Du har fått LIA-platsen</div>
+                              <div className="font-medium text-green-800 dark:text-green-300 text-xs">
+                                ANTAGEN
+                              </div>
+                              <div className="text-xs text-green-700 dark:text-green-400 mt-0.5">
+                                Du har fått LIA-platsen
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -350,16 +371,16 @@ export function AddApplicationForm() {
                       Skickat
                     </div>
                   </SelectItem>
-                  <SelectItem value="antagen">
-                    <div className="flex items-center gap-2">
-                      <UserCheck size={14} className="text-green-600" />
-                      Antagen
-                    </div>
-                  </SelectItem>
                   <SelectItem value="besvarat">
                     <div className="flex items-center gap-2">
                       <MessageSquare size={14} className="text-blue-600" />
                       Besvarat
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="antagen">
+                    <div className="flex items-center gap-2">
+                      <UserCheck size={14} className="text-green-600" />
+                      Antagen
                     </div>
                   </SelectItem>
                 </SelectContent>
