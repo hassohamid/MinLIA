@@ -64,9 +64,7 @@ export default function Hero({
           </div>
           <div className="flex items-center gap-2 text-red-500">
             <Heart size={18} className="fill-current" />
-            <span className="text-sm font-medium">
-              Markera dina toppval
-            </span>
+            <span className="text-sm font-medium">Markera dina toppval</span>
           </div>
         </div>
       </div>
