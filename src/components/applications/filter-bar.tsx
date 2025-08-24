@@ -45,7 +45,7 @@ export default function FilterBar({
   return (
     <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6 p-4 bg-muted/30 rounded-lg border">
       {/* Vänster sida - Filter controls */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="hidden sm:flex flex-wrap items-center gap-3">
         {/* Sortering */}
         <div className="hidden md:flex items-center gap-2">
           <ArrowUpDown size={14} className="text-muted-foreground" />

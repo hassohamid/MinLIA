@@ -360,7 +360,7 @@ export default function ApplicationList({
           100% { transform: translate(-40px, -85px) rotate(-15deg) scale(1); opacity: 0; }
         }
       `}</style>
-      <Card className="mb-10 h-[850px] md:h-[800px]  flex flex-col">
+      <Card className="mb-10 h-[960px] md:h-[1000px]  flex flex-col">
         <CardHeader className="flex-shrink-0">
           <CardTitle className="flex items-center gap-2">
             <Building2 size={20} />
@@ -383,52 +383,62 @@ export default function ApplicationList({
           <div className="flex-1 overflow-auto">
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[250px]">
+                <TableRow className="border-b border-border/50 bg-muted/20">
+                  <TableHead className="w-[250px] h-12 font-semibold text-foreground/80">
                     <div className="flex items-center gap-2">
-                      <Building2 size={16} />
+                      <Building2 size={16} className="text-blue-600" />
                       Företag
                     </div>
                   </TableHead>
-                  <TableHead className="hidden md:table-cell">
+                  <TableHead className="hidden md:table-cell h-12 font-semibold text-foreground/80">
                     <div className="flex items-center gap-2">
-                      <User size={16} />
+                      <User size={16} className="text-purple-600" />
                       Roll
                     </div>
                   </TableHead>
-                  <TableHead className="hidden lg:table-cell">
+                  <TableHead className="hidden lg:table-cell h-12 font-semibold text-foreground/80">
                     <div className="flex items-center gap-2">
-                      <Calendar size={16} />
+                      <Calendar size={16} className="text-green-500" />
                       Ansökningsdatum
                     </div>
                   </TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="w-[50px]"></TableHead>
-                  <TableHead className="w-[50px]"></TableHead>
+                  <TableHead className="h-12 font-semibold text-foreground/80">
+                    Status
+                  </TableHead>
+                  <TableHead className="w-[50px] h-12 hidden sm:table-cell"></TableHead>
+                  <TableHead className="w-[50px] h-12 hidden sm:table-cell"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {currentApplications.map((application) => (
-                  <TableRow key={application.id} className="hover:bg-muted/50">
-                    <TableCell className="font-medium">
-                      {application.company}
+                  <TableRow
+                    key={application.id}
+                    className="border-b border-border/30 hover:bg-gradient-to-r hover:from-muted/30 hover:to-background transition-all duration-200 group"
+                  >
+                    <TableCell className="font-semibold text-foreground py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                        {application.company}
+                      </div>
                     </TableCell>
-                    <TableCell className="hidden md:table-cell">
+                    <TableCell className="hidden md:table-cell py-4 text-muted-foreground">
                       {application.role}
                     </TableCell>
-                    <TableCell className="hidden lg:table-cell">
+                    <TableCell className="hidden lg:table-cell py-4 text-muted-foreground font-mono text-sm">
                       {new Date(application.applied_date).toLocaleDateString(
                         "sv-SE"
                       )}
                     </TableCell>
-                    <TableCell>{getStatusBadge(application.status)}</TableCell>
-                    <TableCell className="relative overflow-hidden">
+                    <TableCell className="py-4">
+                      {getStatusBadge(application.status)}
+                    </TableCell>
+                    <TableCell className="relative overflow-hidden py-4 hidden sm:table-cell">
                       <div className="relative">
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => toggleFavorite(application.id)}
-                          className="p-1 h-8 w-8 relative overflow-visible"
+                          className="p-2 h-9 w-9 relative overflow-visible rounded-full hover:bg-red-50 dark:hover:bg-red-950/20 transition-all duration-200"
                         >
                           <Heart
                             size={16}
@@ -479,18 +489,24 @@ export default function ApplicationList({
                         )}
                       </div>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="py-4 hidden sm:table-cell">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="h-8 w-8 p-0"
+                            className="h-9 w-9 p-0 rounded-full hover:bg-muted/60 transition-all duration-200"
                           >
-                            <MoreHorizontal size={16} />
+                            <MoreHorizontal
+                              size={16}
+                              className="text-muted-foreground"
+                            />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-48">
+                        <DropdownMenuContent
+                          align="end"
+                          className="w-48 border border-border/50 shadow-lg"
+                        >
                           <DropdownMenuLabel>Åtgärder</DropdownMenuLabel>
                           <DropdownMenuSeparator />
 
