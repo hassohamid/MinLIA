@@ -60,8 +60,9 @@ const getStatusBadge = (status: string) => {
       return (
         <Badge
           variant="outline"
-          className="bg-yellow-50 text-yellow-700 border-yellow-200"
+          className="bg-gradient-to-r from-yellow-50 to-yellow-100 text-yellow-800 border-yellow-300 font-medium px-3 py-1 shadow-sm"
         >
+          <Send size={12} className="mr-1.5" />
           Skickat
         </Badge>
       );
@@ -69,8 +70,9 @@ const getStatusBadge = (status: string) => {
       return (
         <Badge
           variant="outline"
-          className="bg-green-50 text-green-700 border-green-200"
+          className="bg-gradient-to-r from-green-50 to-green-100 text-green-800 border-green-300 font-medium px-3 py-1 shadow-sm"
         >
+          <UserCheck size={12} className="mr-1.5" />
           Antagen
         </Badge>
       );
@@ -78,8 +80,9 @@ const getStatusBadge = (status: string) => {
       return (
         <Badge
           variant="outline"
-          className="bg-blue-50 text-blue-700 border-blue-200"
+          className="bg-gradient-to-r from-blue-50 to-blue-100 text-blue-800 border-blue-300 font-medium px-3 py-1 shadow-sm"
         >
+          <MessageSquare size={12} className="mr-1.5" />
           Besvarat
         </Badge>
       );
@@ -318,14 +321,30 @@ export default function ApplicationList({
             searchQuery={searchQuery}
           />
 
-          <div className="flex-1 flex flex-col items-center justify-center py-12">
-            <Building2 size={48} className="text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">
+          <div className="flex-1 flex flex-col items-center justify-center py-16">
+            <div className="relative">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full flex items-center justify-center mb-6">
+                <Building2 size={32} className="text-blue-500" />
+              </div>
+              <div className="absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs font-bold">!</span>
+              </div>
+            </div>
+            <h3 className="text-xl font-semibold mb-3 text-foreground">
               Inga resultat hittades
             </h3>
-            <p className="text-muted-foreground text-center max-w-sm">
-              Prova att justera dina filter eller sökkriterier.
+            <p className="text-muted-foreground text-center max-w-md leading-relaxed">
+              Prova att justera dina filter eller sökkriterier för att hitta
+              dina ansökningar.
             </p>
+            <div className="mt-6 flex gap-2">
+              <div className="px-3 py-1 bg-muted/50 rounded-full text-xs text-muted-foreground">
+                Tips: Sök på företagsnamn
+              </div>
+              <div className="px-3 py-1 bg-muted/50 rounded-full text-xs text-muted-foreground">
+                eller roll
+              </div>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -360,7 +379,7 @@ export default function ApplicationList({
           100% { transform: translate(-40px, -85px) rotate(-15deg) scale(1); opacity: 0; }
         }
       `}</style>
-      <Card className="mb-10 h-[960px] md:h-[1000px]  flex flex-col">
+      <Card className="mb-10 h-[960px] sm:h-[1050px]  flex flex-col">
         <CardHeader className="flex-shrink-0">
           <CardTitle className="flex items-center gap-2">
             <Building2 size={20} />
@@ -567,50 +586,58 @@ export default function ApplicationList({
           </div>
 
           {totalPages > 1 && (
-            <div className="mt-auto pt-6 flex-shrink-0">
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious
-                      onClick={() =>
-                        handlePageChange(Math.max(1, currentPage - 1))
-                      }
-                      className={
-                        currentPage === 1
-                          ? "pointer-events-none opacity-50"
-                          : "cursor-pointer"
-                      }
-                    />
-                  </PaginationItem>
+            <div className="mt-auto pt-6 flex-shrink-0 border-t border-border/30">
+              <div className="flex items-center justify-center">
+                <Pagination>
+                  <PaginationContent className="gap-1">
+                    <PaginationItem>
+                      <PaginationPrevious
+                        onClick={() =>
+                          handlePageChange(Math.max(1, currentPage - 1))
+                        }
+                        className={`transition-all duration-200 ${
+                          currentPage === 1
+                            ? "pointer-events-none opacity-40"
+                            : "cursor-pointer hover:bg-muted hover:text-foreground"
+                        }`}
+                      />
+                    </PaginationItem>
 
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (page) => (
-                      <PaginationItem key={page}>
-                        <PaginationLink
-                          onClick={() => handlePageChange(page)}
-                          isActive={currentPage === page}
-                          className="cursor-pointer"
-                        >
-                          {page}
-                        </PaginationLink>
-                      </PaginationItem>
-                    )
-                  )}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                      (page) => (
+                        <PaginationItem key={page}>
+                          <PaginationLink
+                            onClick={() => handlePageChange(page)}
+                            isActive={currentPage === page}
+                            className={`cursor-pointer transition-all duration-200 ${
+                              currentPage === page
+                                ? "bg-foreground text-white shadow-sm scale-105 hover:bg-foreground/90"
+                                : "hover:bg-muted hover:text-foreground hover:scale-105"
+                            }`}
+                          >
+                            {page}
+                          </PaginationLink>
+                        </PaginationItem>
+                      )
+                    )}
 
-                  <PaginationItem>
-                    <PaginationNext
-                      onClick={() =>
-                        handlePageChange(Math.min(totalPages, currentPage + 1))
-                      }
-                      className={
-                        currentPage === totalPages
-                          ? "pointer-events-none opacity-50"
-                          : "cursor-pointer"
-                      }
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
+                    <PaginationItem>
+                      <PaginationNext
+                        onClick={() =>
+                          handlePageChange(
+                            Math.min(totalPages, currentPage + 1)
+                          )
+                        }
+                        className={`transition-all duration-200 ${
+                          currentPage === totalPages
+                            ? "pointer-events-none opacity-40"
+                            : "cursor-pointer hover:bg-muted hover:text-foreground"
+                        }`}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              </div>
             </div>
           )}
         </CardContent>

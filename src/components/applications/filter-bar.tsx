@@ -1,12 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { ArrowUpDown, Heart, Filter, X } from "lucide-react";
+import { Heart, X, Send, UserCheck, MessageSquare, Filter, ArrowUpDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import SearchBar from "./search-bar";
 
@@ -42,40 +35,109 @@ export default function FilterBar({
     onSearchChange("");
   };
 
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case "skickat":
+        return Send;
+      case "besvarat":
+        return MessageSquare;
+      case "antagen":
+        return UserCheck;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6 p-4 bg-muted/30 rounded-lg border">
-      {/* Vänster sida - Filter controls */}
+    <div className="flex flex-col gap-4 mb-6 p-4 bg-muted/30 rounded-lg border">
+      {/* Filter knappar */}
       <div className="hidden sm:flex flex-wrap items-center gap-3">
-        {/* Sortering */}
-        <div className="hidden md:flex items-center gap-2">
-          <ArrowUpDown size={14} className="text-muted-foreground" />
-          <Select value={currentSort} onValueChange={onSortChange}>
-            <SelectTrigger className="w-[160px] h-9 border-muted-foreground/20">
-              <SelectValue placeholder="Sortera" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="company-asc">Företag A-Ö</SelectItem>
-              <SelectItem value="company-desc">Företag Ö-A</SelectItem>
-              <SelectItem value="date-desc">Senaste datum</SelectItem>
-              <SelectItem value="date-asc">Äldsta datum</SelectItem>
-            </SelectContent>
-          </Select>
+        {/* Sortering - Toggle button */}
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              // Toggle mellan A-Ö och Ö-A
+              const newSort = currentSort === "company-asc" ? "company-desc" : "company-asc";
+              onSortChange(newSort);
+            }}
+            className={`h-9 px-3 ${
+              currentSort.includes("company")
+                ? "bg-slate-50 text-slate-700 hover:bg-slate-100 dark:bg-slate-900/20 dark:text-slate-400"
+                : "hover:bg-muted text-muted-foreground hover:text-foreground"
+            }`}
+            title={currentSort === "company-asc" ? "Klicka för Ö-A" : "Klicka för A-Ö"}
+          >
+            <ArrowUpDown 
+              size={14} 
+              className={`transition-transform duration-200 ${
+                currentSort === "company-desc" ? "rotate-180" : ""
+              }`} 
+            />
+            {currentSort.includes("company") && (
+              <span className="ml-1 text-xs">
+                {currentSort === "company-asc" ? "A-Ö" : "Ö-A"}
+              </span>
+            )}
+          </Button>
         </div>
 
-        {/* Status filter */}
+        {/* Status filter - Icon-based buttons */}
         <div className="flex items-center gap-2">
           <Filter size={14} className="text-muted-foreground" />
-          <Select value={currentStatusFilter} onValueChange={onStatusFilter}>
-            <SelectTrigger className="w-[130px] h-9 border-muted-foreground/20">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Status</SelectItem>
-              <SelectItem value="skickat">Skickat</SelectItem>
-              <SelectItem value="antagen">Antagen</SelectItem>
-              <SelectItem value="besvarat">Besvarat</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="flex flex-wrap gap-1">
+            {/* Skickat Button */}
+            <Button
+              variant={
+                currentStatusFilter === "skickat" ? "secondary" : "ghost"
+              }
+              size="sm"
+              onClick={() => onStatusFilter("skickat")}
+              className={`h-9 px-3 ${
+                currentStatusFilter === "skickat"
+                  ? "bg-yellow-50 text-yellow-700 hover:bg-yellow-100 dark:bg-yellow-900/20 dark:text-yellow-400"
+                  : "hover:bg-muted text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Send size={14} className="mr-1" />
+              Skickat
+            </Button>
+
+            {/* Besvarat Button */}
+            <Button
+              variant={
+                currentStatusFilter === "besvarat" ? "secondary" : "ghost"
+              }
+              size="sm"
+              onClick={() => onStatusFilter("besvarat")}
+              className={`h-9 px-3 ${
+                currentStatusFilter === "besvarat"
+                  ? "bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-400"
+                  : "hover:bg-muted text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <MessageSquare size={14} className="mr-1" />
+              Besvarat
+            </Button>
+
+            {/* Antagen Button */}
+            <Button
+              variant={
+                currentStatusFilter === "antagen" ? "secondary" : "ghost"
+              }
+              size="sm"
+              onClick={() => onStatusFilter("antagen")}
+              className={`h-9 px-3 ${
+                currentStatusFilter === "antagen"
+                  ? "bg-green-50 text-green-700 hover:bg-green-100 dark:bg-green-900/20 dark:text-green-400"
+                  : "hover:bg-muted text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <UserCheck size={14} className="mr-1" />
+              Antagen
+            </Button>
+          </div>
         </div>
 
         {/* Favoriter toggle */}
@@ -119,14 +181,14 @@ export default function FilterBar({
             onClick={resetAllFilters}
             className="h-9 px-3 text-muted-foreground hover:text-foreground"
           >
-            <X size={14} className="mr-1" />
-            Rensa
+            <X size={14} className="lg:mr-1" />
+            <span className="hidden lg:inline">Rensa</span>
           </Button>
         )}
       </div>
 
-      {/* Höger sida - Sökfält */}
-      <div className="w-full sm:w-auto sm:min-w-[300px]">
+      {/* Sökfält - egen rad */}
+      <div className="w-full">
         <SearchBar
           value={searchQuery}
           onChange={onSearchChange}

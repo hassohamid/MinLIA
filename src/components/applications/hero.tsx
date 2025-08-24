@@ -77,7 +77,7 @@ export default function Hero({
         <div className="space-y-4 relative">
           <div
             className={`flex items-center justify-between p-4 rounded-lg bg-muted/30 transition-opacity duration-200 ${
-              !authLoading && !user ? "opacity-30 blur-sm" : "opacity-100"
+              user ? "opacity-100" : "opacity-30 blur-sm"
             }`}
           >
             <div className="flex items-center gap-3">
@@ -91,7 +91,7 @@ export default function Hero({
 
           <div
             className={`flex items-center justify-between p-4 rounded-lg bg-muted/30 transition-opacity duration-200 ${
-              !authLoading && !user ? "opacity-30 blur-sm" : "opacity-100"
+              user ? "opacity-100" : "opacity-30 blur-sm"
             }`}
           >
             <div className="flex items-center gap-3">
@@ -103,12 +103,14 @@ export default function Hero({
             </span>
           </div>
 
-          {/* Overlay for logged out users */}
-          {!authLoading && !user && (
+          {/* Overlay for non-logged in users - shows by default, hides when user is confirmed */}
+          {!user && (
             <div className="absolute inset-0 bg-background/95 backdrop-blur-md rounded-lg flex items-center justify-center">
               <div className="text-center p-4">
                 <span className="text-sm font-medium text-muted-foreground">
-                  Logga in för att se din statistik
+                  {authLoading
+                    ? "Laddar..."
+                    : "Logga in för att se din statistik"}
                 </span>
               </div>
             </div>
