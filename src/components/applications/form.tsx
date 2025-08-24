@@ -291,8 +291,8 @@ export function AddApplicationForm() {
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <div className="ml-2 w-5 h-5 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 hover:from-slate-200 hover:to-slate-300 dark:hover:from-slate-700 dark:hover:to-slate-600 transition-all duration-200 flex items-center justify-center cursor-help shadow-sm border border-slate-300/50 dark:border-slate-600/50 hover:shadow-md hover:scale-110">
-                          <Info size={12} className="text-slate-600 dark:text-slate-400" />
+                        <div className="ml-2 w-4 h-4 rounded-md bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center cursor-help">
+                          <Info size={10} className="text-gray-600 dark:text-gray-400" />
                         </div>
                       </TooltipTrigger>
                     <TooltipContent
@@ -300,56 +300,35 @@ export function AddApplicationForm() {
                       className="p-0 border-0 bg-transparent shadow-none"
                       sideOffset={8}
                     >
-                      <div className="bg-white/95 dark:bg-gray-950/95 backdrop-blur-md border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-xl shadow-black/10 dark:shadow-black/30 p-5 min-w-[320px] max-w-[380px]">
+                      <div className="bg-gray-900 border border-gray-700 rounded-lg shadow-2xl p-4 min-w-[280px] max-w-[320px]">
                         <div className="space-y-3">
-                          <div className="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-yellow-50 to-yellow-100 dark:from-yellow-950/30 dark:to-yellow-900/20 border border-yellow-300/30 dark:border-yellow-800/30 shadow-sm">
-                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/60 dark:to-yellow-800/60 flex items-center justify-center shadow-sm">
-                              <Send
-                                size={14}
-                                className="text-yellow-700 dark:text-yellow-400"
-                              />
+                          <div className="flex items-center gap-3 py-2">
+                            <div className="w-6 h-6 rounded-md bg-gray-800 flex items-center justify-center">
+                              <Send size={12} className="text-yellow-400" />
                             </div>
                             <div className="flex-1">
-                              <div className="font-semibold text-yellow-800 dark:text-yellow-300 text-sm tracking-wide">
-                                SKICKAT
-                              </div>
-                              <div className="text-sm text-yellow-700/90 dark:text-yellow-400/90 mt-1 leading-relaxed">
-                                Ansökan är skickad och väntar på svar
-                              </div>
+                              <div className="text-white text-sm font-medium">Skickat</div>
+                              <div className="text-gray-400 text-xs">Ansökan är skickad</div>
                             </div>
                           </div>
 
-                          <div className="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/20 border border-blue-300/30 dark:border-blue-800/30 shadow-sm">
-                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/60 dark:to-blue-800/60 flex items-center justify-center shadow-sm">
-                              <MessageSquare
-                                size={14}
-                                className="text-blue-700 dark:text-blue-400"
-                              />
+                          <div className="flex items-center gap-3 py-2">
+                            <div className="w-6 h-6 rounded-md bg-gray-800 flex items-center justify-center">
+                              <MessageSquare size={12} className="text-blue-400" />
                             </div>
                             <div className="flex-1">
-                              <div className="font-semibold text-blue-800 dark:text-blue-300 text-sm tracking-wide">
-                                BESVARAT
-                              </div>
-                              <div className="text-sm text-blue-700/90 dark:text-blue-400/90 mt-1 leading-relaxed">
-                                Företaget har svarat (intervju/avslag)
-                              </div>
+                              <div className="text-white text-sm font-medium">Besvarat</div>
+                              <div className="text-gray-400 text-xs">Företaget har svarat</div>
                             </div>
                           </div>
 
-                          <div className="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/20 border border-green-300/30 dark:border-green-800/30 shadow-sm">
-                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/60 dark:to-green-800/60 flex items-center justify-center shadow-sm">
-                              <UserCheck
-                                size={14}
-                                className="text-green-700 dark:text-green-400"
-                              />
+                          <div className="flex items-center gap-3 py-2">
+                            <div className="w-6 h-6 rounded-md bg-gray-800 flex items-center justify-center">
+                              <UserCheck size={12} className="text-green-400" />
                             </div>
                             <div className="flex-1">
-                              <div className="font-semibold text-green-800 dark:text-green-300 text-sm tracking-wide">
-                                ANTAGEN
-                              </div>
-                              <div className="text-sm text-green-700/90 dark:text-green-400/90 mt-1 leading-relaxed">
-                                Du har fått LIA-platsen
-                              </div>
+                              <div className="text-white text-sm font-medium">Antagen</div>
+                              <div className="text-gray-400 text-xs">Du har fått platsen</div>
                             </div>
                           </div>
                         </div>
