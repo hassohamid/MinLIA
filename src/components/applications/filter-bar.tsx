@@ -100,7 +100,11 @@ export default function FilterBar({
           {favoriteCount > 0 && (
             <Badge
               variant="secondary"
-              className="text-xs px-1 min-w-[16px] h-4"
+              className={`text-xs px-1 min-w-[16px] h-4 ${
+                showFavoritesOnly
+                  ? "bg-white text-red-700 dark:bg-red-100 dark:text-red-800"
+                  : ""
+              }`}
             >
               {favoriteCount}
             </Badge>

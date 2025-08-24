@@ -283,11 +283,11 @@ export default function ApplicationList({
             100% { transform: translate(-40px, -85px) rotate(-15deg) scale(1); opacity: 0; }
           }
         `}</style>
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center py-12">
+        <Card className="h-[400px] md:h-[500px] flex flex-col">
+          <CardContent className="flex-1 flex flex-col items-center justify-center py-12">
             <Building2 size={48} className="text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold mb-2">Inga ansökningar än</h3>
-            <p className="text-muted-foreground text-center">
+            <p className="text-muted-foreground text-center max-w-sm">
               Lägg till din första LIA-ansökan för att komma igång!
             </p>
           </CardContent>
@@ -298,14 +298,14 @@ export default function ApplicationList({
 
   if (filteredAndSortedApplications.length === 0) {
     return (
-      <Card>
-        <CardHeader>
+      <Card className="mb-10 h-[900px] md:h-[700px] lg:h-[750px] flex flex-col">
+        <CardHeader className="flex-shrink-0">
           <CardTitle className="flex items-center gap-2">
             <Building2 size={20} />
             Dina ansökningar ({applications.length})
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex-1 flex flex-col">
           <FilterBar
             onSortChange={handleSortChange}
             onStatusFilter={handleStatusFilter}
@@ -318,12 +318,12 @@ export default function ApplicationList({
             searchQuery={searchQuery}
           />
 
-          <div className="flex flex-col items-center justify-center py-12">
+          <div className="flex-1 flex flex-col items-center justify-center py-12">
             <Building2 size={48} className="text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold mb-2">
               Inga resultat hittades
             </h3>
-            <p className="text-muted-foreground text-center">
+            <p className="text-muted-foreground text-center max-w-sm">
               Prova att justera dina filter eller sökkriterier.
             </p>
           </div>
@@ -360,14 +360,14 @@ export default function ApplicationList({
           100% { transform: translate(-40px, -85px) rotate(-15deg) scale(1); opacity: 0; }
         }
       `}</style>
-      <Card className="mb-10">
-        <CardHeader>
+      <Card className="mb-10 h-[850px] md:h-[800px]  flex flex-col">
+        <CardHeader className="flex-shrink-0">
           <CardTitle className="flex items-center gap-2">
             <Building2 size={20} />
             Dina ansökningar ({filteredAndSortedApplications.length})
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex-1 flex flex-col overflow-hidden">
           <FilterBar
             onSortChange={handleSortChange}
             onStatusFilter={handleStatusFilter}
@@ -380,7 +380,7 @@ export default function ApplicationList({
             searchQuery={searchQuery}
           />
 
-          <div className="overflow-hidden">
+          <div className="flex-1 overflow-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -551,7 +551,7 @@ export default function ApplicationList({
           </div>
 
           {totalPages > 1 && (
-            <div className="mt-6">
+            <div className="mt-auto pt-6 flex-shrink-0">
               <Pagination>
                 <PaginationContent>
                   <PaginationItem>
