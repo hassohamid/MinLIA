@@ -65,7 +65,7 @@ export default function Hero({
           <div className="flex items-center gap-2 text-red-500">
             <Heart size={18} className="fill-current" />
             <span className="text-sm font-medium">
-              Markera dina drömföretag
+              Markera dina toppval
             </span>
           </div>
         </div>

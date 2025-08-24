@@ -55,6 +55,12 @@ import {
 } from "@/lib/api";
 import { toast } from "sonner";
 
+// Utility function to capitalize first letter
+const capitalizeFirst = (str: string) => {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
+
 const getStatusBadge = (status: string) => {
   switch (status) {
     case "skickat":
@@ -206,7 +212,7 @@ export default function ApplicationList({
 
     try {
       await toggleApplicationFavorite(id);
-      
+
       // Show beautiful toast notification
       if (isAddingToFavorites) {
         toast.success("Tillagd i favoriter!", {
@@ -233,10 +239,10 @@ export default function ApplicationList({
     if (!id || !newStatus) return;
 
     const app = applications.find((app) => app.id === id);
-    
+
     try {
       await updateApplicationStatus(id, newStatus);
-      
+
       // Show beautiful status-specific toast
       const statusMessages = {
         skickat: {
@@ -257,7 +263,7 @@ export default function ApplicationList({
       };
 
       const message = statusMessages[newStatus as keyof typeof statusMessages];
-      
+
       if (message) {
         if (newStatus === "antagen") {
           toast.success(message.title, {
@@ -296,13 +302,13 @@ export default function ApplicationList({
     if (applicationToDelete?.id) {
       try {
         await deleteApp(applicationToDelete.id);
-        
+
         toast.success("Ansökan borttagen", {
           description: `Ansökningen till ${applicationToDelete.company} har tagits bort`,
           icon: "🗑️",
           duration: 4000,
         });
-        
+
         setDeleteDialogOpen(false);
         setApplicationToDelete(null);
       } catch (error) {
@@ -526,11 +532,11 @@ export default function ApplicationList({
                     <TableCell className="font-semibold text-foreground py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                        {application.company}
+                        {capitalizeFirst(application.company)}
                       </div>
                     </TableCell>
                     <TableCell className="hidden md:table-cell py-4 text-muted-foreground">
-                      {application.role}
+                      {capitalizeFirst(application.role)}
                     </TableCell>
                     <TableCell className="hidden lg:table-cell py-4 text-muted-foreground font-mono text-sm">
                       {new Date(application.applied_date).toLocaleDateString(
