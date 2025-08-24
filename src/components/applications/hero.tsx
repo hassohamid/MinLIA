@@ -7,6 +7,7 @@ import {
   ChartColumnDecreasing,
   Bookmark,
   MousePointer2,
+  Heart,
 } from "lucide-react";
 import type { Application } from "./types";
 import { createClient } from "@/lib/supabase/client";
@@ -38,7 +39,6 @@ export default function Hero({
 
   return (
     <div className="flex justify-between  gap-2 pt-10 relative">
-      <div className="absolute h-60 w-full bg-blue-50/30 dark:bg-neutral-100/5 -z-22 blur-3xl rounded-full"></div>
       <div className="p-6 mt-10  border-l-5 border-blue-700 rounded-xl relative">
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight   ">
           Din LIA-koll<span className="text-green-300">.</span>
@@ -61,6 +61,10 @@ export default function Hero({
                 ? "Spåra och hantera alla dina ansökningar"
                 : "Ett klick för att registrera dig "}
             </span>
+          </div>
+          <div className="flex items-center gap-2 text-red-500">
+            <Heart size={18} className="fill-current" />
+            <span className="text-sm font-medium">Spara dina favoriter</span>
           </div>
         </div>
       </div>
