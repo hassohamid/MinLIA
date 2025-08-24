@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { createApplication } from "@/lib/api";
-import { ValidationError } from "@/lib/errors";
 
 export interface ApplicationFormProps {
   company: string;
@@ -59,23 +58,22 @@ export function AddApplicationForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    try {
-      await createApplication(formData);
-    } catch (err) {
-      if (err instanceof ValidationError) {
-        console.error(err.message, err.issues);
+    const result = await createApplication(formData);
+    if (!result.success) {
+      if (result.type === "validation") {
+        console.error(result.error, result.issues);
       }
-    } finally {
-      // setFormData({
-      //   company: "",
-      //   applied_date: new Date().toISOString().split("T")[0],
-      //   role: "",
-      //   status: "skickat",
-      // });
-
-      setLoading(false);
-      // setToggleForm(false);
     }
+
+    // setFormData({
+    //   company: "",
+    //   applied_date: new Date().toISOString().split("T")[0],
+    //   role: "",
+    //   status: "skickat",
+    // });
+
+    setLoading(false);
+    // setToggleForm(false);
   }
 
   const isFormValid =

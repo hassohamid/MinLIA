@@ -6,21 +6,13 @@ import {
   Bookmark,
   MousePointer2,
 } from "lucide-react";
+import type { Application } from "./types";
 
-interface Application {
-  id: number;
-  companyName: string;
-  role: string;
-  applicationDate: string;
-  status: string;
-  isFavorite: boolean;
-}
-
-interface HeroProps {
+export default function Hero({
+  applications,
+}: {
   applications: Application[];
-}
-
-export default function Hero({ applications }: HeroProps) {
+}) {
   const totalApplications = applications.length;
   const answeredApplications = applications.filter(
     (app) => app.status === "besvarat"

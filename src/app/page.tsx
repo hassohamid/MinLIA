@@ -1,9 +1,10 @@
 import { AddApplicationForm } from "@/components/applications/form";
 import Hero from "@/components/applications/hero";
 import ApplicationList from "@/components/applications/list";
+import { getApplications } from "@/lib/api";
 
-export default function Home() {
-  const applications = [];
+export default async function Home() {
+  const applications = await getApplications();
   return (
     <div
       className="container max-w-5xl m-auto 

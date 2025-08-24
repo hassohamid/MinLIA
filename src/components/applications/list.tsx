@@ -24,7 +24,6 @@ import {
   User,
   MoreHorizontal,
   Heart,
-  Edit,
   Trash2,
   Send,
   UserCheck,
@@ -46,23 +45,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import FilterBar from "./filter-bar";
-
-interface Application {
-  id: number;
-  companyName: string;
-  role: string;
-  applicationDate: string;
-  status: string;
-  isFavorite: boolean;
-}
-
-interface ApplicationListProps {
-  applications: Application[];
-  setApplications: React.Dispatch<React.SetStateAction<Application[]>>;
-}
+import type { Application } from "./types";
 
 const getStatusBadge = (status: string) => {
   switch (status) {
@@ -100,8 +85,9 @@ const getStatusBadge = (status: string) => {
 
 export default function ApplicationList({
   applications,
-  setApplications,
-}: ApplicationListProps) {
+}: {
+  applications: Application[];
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState("company-asc");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -127,7 +113,7 @@ export default function ApplicationList({
       const query = searchQuery.toLowerCase().trim();
       filtered = filtered.filter(
         (app) =>
-          app.companyName.toLowerCase().includes(query) ||
+          app.company.toLowerCase().includes(query) ||
           app.role.toLowerCase().includes(query)
       );
     }
@@ -139,25 +125,25 @@ export default function ApplicationList({
 
     // Filter by favorites
     if (showFavoritesOnly) {
-      filtered = filtered.filter((app) => app.isFavorite);
+      filtered = filtered.filter((app) => app.is_favorite);
     }
 
     // Sort applications
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "company-asc":
-          return a.companyName.localeCompare(b.companyName);
+          return a.company.localeCompare(b.company);
         case "company-desc":
-          return b.companyName.localeCompare(a.companyName);
+          return b.company.localeCompare(a.company);
         case "date-desc":
           return (
-            new Date(b.applicationDate).getTime() -
-            new Date(a.applicationDate).getTime()
+            new Date(b.applied_date).getTime() -
+            new Date(a.applied_date).getTime()
           );
         case "date-asc":
           return (
-            new Date(a.applicationDate).getTime() -
-            new Date(b.applicationDate).getTime()
+            new Date(a.applied_date).getTime() -
+            new Date(b.applied_date).getTime()
           );
         default:
           return 0;
@@ -178,20 +164,22 @@ export default function ApplicationList({
   );
 
   const favoriteCount = applications.filter(
-    (app: Application) => app.isFavorite
+    (app: Application) => app.is_favorite
   ).length;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const toggleFavorite = (id: number) => {
+  const toggleFavorite = (id?: number) => {
+    if (!id) return;
+
     // Trigger heart animation
     setHeartAnimations((prev) => ({ ...prev, [id]: true }));
 
     // Check if we're adding to favorites to trigger floating hearts
     const app = applications.find((app) => app.id === id);
-    if (app && !app.isFavorite) {
+    if (app && !app.is_favorite) {
       setFloatingHearts((prev) => ({ ...prev, [id]: true }));
 
       // Remove floating hearts after animation
@@ -205,25 +193,22 @@ export default function ApplicationList({
       setHeartAnimations((prev) => ({ ...prev, [id]: false }));
     }, 600);
 
-    setApplications((prev: Application[]) =>
-      prev.map((app: Application) =>
-        app.id === id ? { ...app, isFavorite: !app.isFavorite } : app
-      )
-    );
+    // TODO: Implement actual favorite toggle logic with server action
+    console.log("Toggle favorite for application:", id);
   };
 
-  const updateApplicationStatus = (id: number, newStatus: string) => {
-    setApplications((prev: Application[]) =>
-      prev.map((app: Application) =>
-        app.id === id ? { ...app, status: newStatus } : app
-      )
-    );
+  const updateApplicationStatus = (id?: number, newStatus?: string) => {
+    if (!id || !newStatus) return;
+
+    // TODO: Implement actual status update logic with server action
+    console.log("Update status for application:", id, "to:", newStatus);
   };
 
-  const deleteApplication = (id: number) => {
-    setApplications((prev: Application[]) =>
-      prev.filter((app: Application) => app.id !== id)
-    );
+  const deleteApplication = (id?: number) => {
+    if (!id) return;
+
+    // TODO: Implement actual delete logic with server action
+    console.log("Delete application:", id);
   };
 
   const handleDeleteClick = (application: Application) => {
@@ -232,7 +217,7 @@ export default function ApplicationList({
   };
 
   const confirmDelete = () => {
-    if (applicationToDelete) {
+    if (applicationToDelete?.id) {
       deleteApplication(applicationToDelete.id);
       setDeleteDialogOpen(false);
       setApplicationToDelete(null);
@@ -242,19 +227,6 @@ export default function ApplicationList({
   const cancelDelete = () => {
     setDeleteDialogOpen(false);
     setApplicationToDelete(null);
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "skickat":
-        return <Send size={14} className="text-yellow-600" />; // Gul som badge
-      case "antagen":
-        return <UserCheck size={14} className="text-green-600" />; // Grön som badge
-      case "besvarat":
-        return <MessageSquare size={14} className="text-blue-600" />; // Blå som badge
-      default:
-        return null;
-    }
   };
 
   // Reset page when filters change
@@ -435,11 +407,11 @@ export default function ApplicationList({
                 {currentApplications.map((application) => (
                   <TableRow key={application.id} className="hover:bg-muted/50">
                     <TableCell className="font-medium">
-                      {application.companyName}
+                      {application.company}
                     </TableCell>
                     <TableCell>{application.role}</TableCell>
                     <TableCell>
-                      {new Date(application.applicationDate).toLocaleDateString(
+                      {new Date(application.applied_date).toLocaleDateString(
                         "sv-SE"
                       )}
                     </TableCell>
@@ -455,29 +427,32 @@ export default function ApplicationList({
                           <Heart
                             size={16}
                             className={`transition-all duration-300 ${
-                              application.isFavorite
+                              application.is_favorite
                                 ? "fill-red-500 text-red-500"
                                 : "text-gray-400 hover:text-red-400"
                             } ${
-                              heartAnimations[application.id]
+                              application.id && heartAnimations[application.id]
                                 ? "animate-bounce scale-125"
                                 : ""
                             }`}
                             style={{
-                              filter: heartAnimations[application.id]
-                                ? "drop-shadow(0 0 8px rgba(239, 68, 68, 0.6))"
-                                : "",
+                              filter:
+                                application.id &&
+                                heartAnimations[application.id]
+                                  ? "drop-shadow(0 0 8px rgba(239, 68, 68, 0.6))"
+                                  : "",
                             }}
                           />
 
                           {/* Pulse effect on click */}
-                          {heartAnimations[application.id] && (
-                            <div className="absolute inset-0 rounded-full bg-red-500/20 animate-ping" />
-                          )}
+                          {application.id &&
+                            heartAnimations[application.id] && (
+                              <div className="absolute inset-0 rounded-full bg-red-500/20 animate-ping" />
+                            )}
                         </Button>
 
                         {/* Floating hearts animation */}
-                        {floatingHearts[application.id] && (
+                        {application.id && floatingHearts[application.id] && (
                           <div className="absolute inset-0 pointer-events-none">
                             {[...Array(6)].map((_, i) => (
                               <div
@@ -632,7 +607,7 @@ export default function ApplicationList({
               <DialogDescription>
                 Är du säker på att du vill ta bort ansökningen till{" "}
                 <span className="font-semibold">
-                  {applicationToDelete?.companyName}
+                  {applicationToDelete?.company}
                 </span>{" "}
                 för rollen{" "}
                 <span className="font-semibold">
