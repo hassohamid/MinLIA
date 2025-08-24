@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-background/50 backdrop-blur-sm ">
-      <div className="container mx-auto px-6 py-8">
+    <footer className="mt-20 border-t border-border/40 bg-background">
+      <div className="container mx-auto px-6 py-6">
         <div className="text-center">
           <p className="text-sm text-muted-foreground">
             Utvecklad av studenter för studenter

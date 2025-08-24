@@ -1,5 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { Heart, X, Send, UserCheck, MessageSquare, Filter, ArrowUpDown } from "lucide-react";
+import {
+  Heart,
+  X,
+  Send,
+  UserCheck,
+  MessageSquare,
+  Filter,
+  ArrowUpDown,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import SearchBar from "./search-bar";
 
@@ -59,7 +67,8 @@ export default function FilterBar({
             size="sm"
             onClick={() => {
               // Toggle mellan A-Ö och Ö-A
-              const newSort = currentSort === "company-asc" ? "company-desc" : "company-asc";
+              const newSort =
+                currentSort === "company-asc" ? "company-desc" : "company-asc";
               onSortChange(newSort);
             }}
             className={`h-9 px-3 ${
@@ -67,13 +76,17 @@ export default function FilterBar({
                 ? "bg-slate-50 text-slate-700 hover:bg-slate-100 dark:bg-slate-900/20 dark:text-slate-400"
                 : "hover:bg-muted text-muted-foreground hover:text-foreground"
             }`}
-            title={currentSort === "company-asc" ? "Klicka för Ö-A" : "Klicka för A-Ö"}
+            title={
+              currentSort === "company-asc"
+                ? "Klicka för Ö-A"
+                : "Klicka för A-Ö"
+            }
           >
-            <ArrowUpDown 
-              size={14} 
+            <ArrowUpDown
+              size={14}
               className={`transition-transform duration-200 ${
                 currentSort === "company-desc" ? "rotate-180" : ""
-              }`} 
+              }`}
             />
             {currentSort.includes("company") && (
               <span className="ml-1 text-xs">
