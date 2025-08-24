@@ -47,7 +47,7 @@ export default function FilterBar({
       {/* Vänster sida - Filter controls */}
       <div className="flex flex-wrap items-center gap-3">
         {/* Sortering */}
-        <div className="flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2">
           <ArrowUpDown size={14} className="text-muted-foreground" />
           <Select value={currentSort} onValueChange={onSortChange}>
             <SelectTrigger className="w-[160px] h-9 border-muted-foreground/20">

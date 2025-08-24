@@ -390,13 +390,13 @@ export default function ApplicationList({
                       Företag
                     </div>
                   </TableHead>
-                  <TableHead>
+                  <TableHead className="hidden md:table-cell">
                     <div className="flex items-center gap-2">
                       <User size={16} />
                       Roll
                     </div>
                   </TableHead>
-                  <TableHead>
+                  <TableHead className="hidden lg:table-cell">
                     <div className="flex items-center gap-2">
                       <Calendar size={16} />
                       Ansökningsdatum
@@ -413,8 +413,10 @@ export default function ApplicationList({
                     <TableCell className="font-medium">
                       {application.company}
                     </TableCell>
-                    <TableCell>{application.role}</TableCell>
-                    <TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {application.role}
+                    </TableCell>
+                    <TableCell className="hidden lg:table-cell">
                       {new Date(application.applied_date).toLocaleDateString(
                         "sv-SE"
                       )}
