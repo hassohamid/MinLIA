@@ -422,7 +422,13 @@ export default function ApplicationList({
                     </div>
                   </TableHead>
                   <TableHead className="h-12 font-semibold text-foreground/80">
-                    Status
+                    <div className="flex items-center gap-2">
+                      <div className="relative">
+                        <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                        <div className="absolute inset-0 w-3 h-3 bg-orange-500 rounded-full animate-ping opacity-75"></div>
+                      </div>
+                      Status
+                    </div>
                   </TableHead>
                   <TableHead className="w-[50px] h-12 hidden sm:table-cell"></TableHead>
                   <TableHead className="w-[50px] h-12 hidden sm:table-cell"></TableHead>

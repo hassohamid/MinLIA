@@ -287,66 +287,67 @@ export function AddApplicationForm() {
               >
                 <CheckCircle2 size={16} className="text-amber-500" />
                 Status
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="ml-1 w-4 h-4 rounded-full bg-muted-foreground/20 hover:bg-muted-foreground/30 transition-colors flex items-center justify-center cursor-help">
-                        <Info size={10} className="text-muted-foreground" />
-                      </div>
-                    </TooltipTrigger>
+                <div className="hidden sm:block">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="ml-2 w-5 h-5 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 hover:from-slate-200 hover:to-slate-300 dark:hover:from-slate-700 dark:hover:to-slate-600 transition-all duration-200 flex items-center justify-center cursor-help shadow-sm border border-slate-300/50 dark:border-slate-600/50 hover:shadow-md hover:scale-110">
+                          <Info size={12} className="text-slate-600 dark:text-slate-400" />
+                        </div>
+                      </TooltipTrigger>
                     <TooltipContent
                       side="right"
                       className="p-0 border-0 bg-transparent shadow-none"
                       sideOffset={8}
                     >
-                      <div className="bg-background/95 backdrop-blur-sm border border-border/50 rounded-xl shadow-lg p-4 min-w-[280px]">
+                      <div className="bg-white/95 dark:bg-gray-950/95 backdrop-blur-md border border-gray-200/50 dark:border-gray-800/50 rounded-2xl shadow-xl shadow-black/10 dark:shadow-black/30 p-5 min-w-[320px] max-w-[380px]">
                         <div className="space-y-3">
-                          <div className="flex items-start gap-3 p-2 rounded-lg bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800/30">
-                            <div className="w-6 h-6 rounded-full bg-yellow-100 dark:bg-yellow-900/50 flex items-center justify-center mt-0.5">
+                          <div className="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-yellow-50 to-yellow-100 dark:from-yellow-950/30 dark:to-yellow-900/20 border border-yellow-300/30 dark:border-yellow-800/30 shadow-sm">
+                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/60 dark:to-yellow-800/60 flex items-center justify-center shadow-sm">
                               <Send
-                                size={12}
-                                className="text-yellow-600 dark:text-yellow-400"
+                                size={14}
+                                className="text-yellow-700 dark:text-yellow-400"
                               />
                             </div>
                             <div className="flex-1">
-                              <div className="font-medium text-yellow-800 dark:text-yellow-300 text-xs">
+                              <div className="font-semibold text-yellow-800 dark:text-yellow-300 text-sm tracking-wide">
                                 SKICKAT
                               </div>
-                              <div className="text-xs text-yellow-700 dark:text-yellow-400 mt-0.5">
+                              <div className="text-sm text-yellow-700/90 dark:text-yellow-400/90 mt-1 leading-relaxed">
                                 Ansökan är skickad och väntar på svar
                               </div>
                             </div>
                           </div>
 
-                          <div className="flex items-start gap-3 p-2 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800/30">
-                            <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mt-0.5">
+                          <div className="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-900/20 border border-blue-300/30 dark:border-blue-800/30 shadow-sm">
+                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/60 dark:to-blue-800/60 flex items-center justify-center shadow-sm">
                               <MessageSquare
-                                size={12}
-                                className="text-blue-600 dark:text-blue-400"
+                                size={14}
+                                className="text-blue-700 dark:text-blue-400"
                               />
                             </div>
                             <div className="flex-1">
-                              <div className="font-medium text-blue-800 dark:text-blue-300 text-xs">
+                              <div className="font-semibold text-blue-800 dark:text-blue-300 text-sm tracking-wide">
                                 BESVARAT
                               </div>
-                              <div className="text-xs text-blue-700 dark:text-blue-400 mt-0.5">
+                              <div className="text-sm text-blue-700/90 dark:text-blue-400/90 mt-1 leading-relaxed">
                                 Företaget har svarat (intervju/avslag)
                               </div>
                             </div>
                           </div>
 
-                          <div className="flex items-start gap-3 p-2 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800/30">
-                            <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center mt-0.5">
+                          <div className="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-r from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/20 border border-green-300/30 dark:border-green-800/30 shadow-sm">
+                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/60 dark:to-green-800/60 flex items-center justify-center shadow-sm">
                               <UserCheck
-                                size={12}
-                                className="text-green-600 dark:text-green-400"
+                                size={14}
+                                className="text-green-700 dark:text-green-400"
                               />
                             </div>
                             <div className="flex-1">
-                              <div className="font-medium text-green-800 dark:text-green-300 text-xs">
+                              <div className="font-semibold text-green-800 dark:text-green-300 text-sm tracking-wide">
                                 ANTAGEN
                               </div>
-                              <div className="text-xs text-green-700 dark:text-green-400 mt-0.5">
+                              <div className="text-sm text-green-700/90 dark:text-green-400/90 mt-1 leading-relaxed">
                                 Du har fått LIA-platsen
                               </div>
                             </div>
@@ -356,6 +357,7 @@ export function AddApplicationForm() {
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
+                </div>
               </Label>
               <Select
                 value={formData.status}
