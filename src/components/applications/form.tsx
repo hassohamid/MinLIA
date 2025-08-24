@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { createApplication } from "@/lib/api";
+import { ValidationError } from "@/lib/errors";
 
 export interface ApplicationFormProps {
   company: string;
@@ -61,6 +62,9 @@ export function AddApplicationForm() {
     try {
       await createApplication(formData);
     } catch (err) {
+      if (err instanceof ValidationError) {
+        console.error(err.message, err.issues);
+      }
     } finally {
       // setFormData({
       //   company: "",

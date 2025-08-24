@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { z, ZodError } from "zod";
+import { isSupabaseError } from "@/lib/errors";
 
 export async function GET(req: NextRequest) {
   try {
@@ -19,6 +20,16 @@ export async function GET(req: NextRequest) {
     if (!data?.length) return NextResponse.json([], { status: 200 });
     return NextResponse.json(data, { status: 200 });
   } catch (err) {
+    if (isSupabaseError(err)) {
+      return NextResponse.json(
+        {
+          error: "Database error",
+          details: err.message,
+          code: err.code,
+        },
+        { status: 500 }
+      );
+    }
     return NextResponse.json(
       {
         error: "Internal server error",
@@ -48,6 +59,11 @@ export async function POST(req: NextRequest) {
     }
     const validatedData = ApplicationSchema.parse(body);
     console.log(validatedData);
+    const { error } = await supabase
+      .from("applications")
+      .insert({ user_id: user.id, ...validatedData });
+
+    if (error) throw error;
     return NextResponse.json(
       {
         message: "Success",
@@ -55,14 +71,23 @@ export async function POST(req: NextRequest) {
       { status: 201 }
     );
   } catch (err) {
-    console.error(err);
     if (err instanceof ZodError) {
       return NextResponse.json(
         {
           error: "Validation failed",
-          issues: err.issues, // array of issues with paths + messages
+          issues: err.issues,
         },
         { status: 400 }
+      );
+    }
+    if (isSupabaseError(err)) {
+      return NextResponse.json(
+        {
+          error: "Database error",
+          details: err.message,
+          code: err.code,
+        },
+        { status: 500 }
       );
     }
     return NextResponse.json(
