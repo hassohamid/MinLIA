@@ -58,13 +58,15 @@ export default function Hero({
               {authLoading
                 ? "Laddar..."
                 : user
-                ? "Spåra och hantera alla dina ansökningar"
+                ? "Bättre än Excel eller Word-dokument"
                 : "Ett klick för att registrera dig "}
             </span>
           </div>
           <div className="flex items-center gap-2 text-red-500">
             <Heart size={18} className="fill-current" />
-            <span className="text-sm font-medium">Spara dina favoriter</span>
+            <span className="text-sm font-medium">
+              Markera dina drömföretag
+            </span>
           </div>
         </div>
       </div>

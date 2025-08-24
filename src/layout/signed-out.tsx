@@ -36,10 +36,7 @@ export default function SignedOut() {
               fill="currentColor"
             />
           </svg>
-          <span className="hidden xs:inline sm:inline ml-2">
-            Logga in med Google
-          </span>
-          <span className="inline xs:hidden sm:hidden ml-1">Logga in</span>
+          <span className=" ml-1">Logga in</span>
         </Button>
       </li>
     </ul>
