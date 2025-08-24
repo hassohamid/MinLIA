@@ -63,17 +63,18 @@ export function AddApplicationForm() {
       if (result.type === "validation") {
         console.error(result.error, result.issues);
       }
+    } else {
+      // Reset form and close on success
+      setFormData({
+        company: "",
+        applied_date: new Date().toISOString().split("T")[0],
+        role: "",
+        status: "skickat",
+      });
+      setToggleForm(false);
     }
 
-    // setFormData({
-    //   company: "",
-    //   applied_date: new Date().toISOString().split("T")[0],
-    //   role: "",
-    //   status: "skickat",
-    // });
-
     setLoading(false);
-    // setToggleForm(false);
   }
 
   const isFormValid =

@@ -48,6 +48,11 @@ import {
 } from "@/components/ui/dialog";
 import FilterBar from "./filter-bar";
 import type { Application } from "./types";
+import {
+  updateApplicationStatus,
+  toggleApplicationFavorite,
+  deleteApplication,
+} from "@/lib/api";
 
 const getStatusBadge = (status: string) => {
   switch (status) {
@@ -171,7 +176,7 @@ export default function ApplicationList({
     setCurrentPage(page);
   };
 
-  const toggleFavorite = (id?: number) => {
+  const toggleFavorite = async (id?: number) => {
     if (!id) return;
 
     // Trigger heart animation
@@ -195,20 +200,19 @@ export default function ApplicationList({
 
     // TODO: Implement actual favorite toggle logic with server action
     console.log("Toggle favorite for application:", id);
+    await toggleApplicationFavorite(id);
   };
 
-  const updateApplicationStatus = (id?: number, newStatus?: string) => {
+  const updateStatus = async (id?: number, newStatus?: string) => {
     if (!id || !newStatus) return;
 
-    // TODO: Implement actual status update logic with server action
-    console.log("Update status for application:", id, "to:", newStatus);
+    await updateApplicationStatus(id, newStatus);
   };
 
-  const deleteApplication = (id?: number) => {
+  const deleteApp = async (id?: number) => {
     if (!id) return;
 
-    // TODO: Implement actual delete logic with server action
-    console.log("Delete application:", id);
+    await deleteApplication(id);
   };
 
   const handleDeleteClick = (application: Application) => {
@@ -216,9 +220,9 @@ export default function ApplicationList({
     setDeleteDialogOpen(true);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (applicationToDelete?.id) {
-      deleteApplication(applicationToDelete.id);
+      await deleteApp(applicationToDelete.id);
       setDeleteDialogOpen(false);
       setApplicationToDelete(null);
     }
@@ -356,7 +360,7 @@ export default function ApplicationList({
           100% { transform: translate(-40px, -85px) rotate(-15deg) scale(1); opacity: 0; }
         }
       `}</style>
-      <Card>
+      <Card className="mb-10">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building2 size={20} />
@@ -491,7 +495,7 @@ export default function ApplicationList({
                           {/* Status ändringar */}
                           <DropdownMenuItem
                             onClick={() =>
-                              updateApplicationStatus(application.id, "skickat")
+                              updateStatus(application.id, "skickat")
                             }
                             disabled={application.status === "skickat"}
                             className="flex items-center gap-2"
@@ -502,10 +506,7 @@ export default function ApplicationList({
 
                           <DropdownMenuItem
                             onClick={() =>
-                              updateApplicationStatus(
-                                application.id,
-                                "besvarat"
-                              )
+                              updateStatus(application.id, "besvarat")
                             }
                             disabled={application.status === "besvarat"}
                             className="flex items-center gap-2"
@@ -519,7 +520,7 @@ export default function ApplicationList({
 
                           <DropdownMenuItem
                             onClick={() =>
-                              updateApplicationStatus(application.id, "antagen")
+                              updateStatus(application.id, "antagen")
                             }
                             disabled={application.status === "antagen"}
                             className="flex items-center gap-2"

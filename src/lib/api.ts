@@ -3,6 +3,7 @@
 import type { ApplicationFormProps } from "@/components/applications/form";
 import { z, ZodError } from "zod";
 import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
 
 import { isSupabaseError } from "@/lib/errors";
 
@@ -33,6 +34,9 @@ export async function createApplication(data: ApplicationFormProps) {
       .insert({ user_id: user.id, ...validatedData });
 
     if (error) throw error;
+
+    // Revalidate the home page to show the new application
+    revalidatePath("/");
 
     return { success: true };
   } catch (err) {
@@ -66,7 +70,7 @@ export async function getApplications() {
     } = await supabase.auth.getUser();
 
     if (userError || !user) {
-      return { success: false, error: "Unauthorized", type: "auth" };
+      return [];
     }
 
     const { data, error } = await supabase
@@ -77,6 +81,122 @@ export async function getApplications() {
     if (error) throw error;
     console.log(data);
     return data ?? [];
+  } catch (err) {
+    if (isSupabaseError(err)) {
+      console.error("Database error:", err.message);
+      return [];
+    }
+    console.error("Unexpected error:", err);
+    return [];
+  }
+}
+
+export async function updateApplicationStatus(id: number, status: string) {
+  try {
+    const supabase = await createClient();
+
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      return { success: false, error: "Unauthorized", type: "auth" };
+    }
+
+    const { error } = await supabase
+      .from("applications")
+      .update({ status })
+      .eq("id", id)
+      .eq("user_id", user.id);
+
+    if (error) throw error;
+
+    revalidatePath("/");
+    return { success: true };
+  } catch (err) {
+    if (isSupabaseError(err)) {
+      return {
+        success: false,
+        error: err.message,
+        type: "database",
+        code: err.code,
+      };
+    }
+    throw err;
+  }
+}
+
+export async function toggleApplicationFavorite(id: number) {
+  try {
+    const supabase = await createClient();
+
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      return { success: false, error: "Unauthorized", type: "auth" };
+    }
+
+    // First get current favorite status
+    const { data: currentApp, error: fetchError } = await supabase
+      .from("applications")
+      .select("is_favorite")
+      .eq("id", id)
+      .eq("user_id", user.id)
+      .single();
+
+    if (fetchError) throw fetchError;
+
+    // Toggle the favorite status
+    const { error } = await supabase
+      .from("applications")
+      .update({ is_favorite: !currentApp.is_favorite })
+      .eq("id", id)
+      .eq("user_id", user.id);
+
+    if (error) throw error;
+
+    revalidatePath("/");
+    return { success: true };
+  } catch (err) {
+    if (isSupabaseError(err)) {
+      return {
+        success: false,
+        error: err.message,
+        type: "database",
+        code: err.code,
+      };
+    }
+    throw err;
+  }
+}
+
+export async function deleteApplication(id: number) {
+  try {
+    const supabase = await createClient();
+
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      return { success: false, error: "Unauthorized", type: "auth" };
+    }
+
+    const { error } = await supabase
+      .from("applications")
+      .delete()
+      .eq("id", id)
+      .eq("user_id", user.id);
+
+    if (error) throw error;
+
+    revalidatePath("/");
+    return { success: true };
   } catch (err) {
     if (isSupabaseError(err)) {
       return {
