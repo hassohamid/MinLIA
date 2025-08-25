@@ -7,9 +7,12 @@ export default function Footer() {
         <div className="text-center space-y-6">
           {/* Main message */}
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <span>Utvecklad med</span>
+            <span>utvecklad med</span>
             <Heart className="w-4 h-4 text-rose-500 fill-current rotate-12" />
-            <span>av studenter för studenter</span>
+            <span>
+              av <span className="border-b">studenter</span> för
+              <span className="border-b"> studenter</span>
+            </span>
           </div>
 
           {/* Creators */}

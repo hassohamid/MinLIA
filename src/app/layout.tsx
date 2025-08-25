@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MinLIA - Håll koll på företagen",
+  title: "MinLIA - Håll dig organiserad",
   description:
     "MinLIA hjälper dig att organisera LIA-praktik med uppgifter, anteckningar och dokument på ett enkelt sätt.",
   icons: {
