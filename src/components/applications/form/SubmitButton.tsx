@@ -8,7 +8,7 @@ export function SubmitButton() {
   return (
     <Button
       type="submit"
-      className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 shadow-lg hover:shadow-xl"
+      className="w-full h-12 bg-primary transition-all duration-200 shadow-lg hover:shadow-xl"
       disabled={pending}
     >
       {pending ? (

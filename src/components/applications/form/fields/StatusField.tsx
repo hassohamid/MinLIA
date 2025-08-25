@@ -15,9 +15,9 @@ import {
 import {
   CheckCircle2,
   Send,
-  UserCheck,
   MessageSquare,
   Info,
+  UserRoundCheck,
 } from "lucide-react";
 
 export function StatusField() {
@@ -27,15 +27,15 @@ export function StatusField() {
         htmlFor="status"
         className="flex items-center gap-2 text-sm font-medium"
       >
-        <CheckCircle2 size={16} className="text-amber-500" />
+        <CheckCircle2 size={16} className="text-yellow-300" />
         Status
         <div className="hidden sm:block">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <div className="ml-2 w-4 h-4 rounded-md bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center cursor-help">
+                <div className="ml-2 w-5 h-5 rounded-md bg-muted hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 flex items-center justify-center cursor-help">
                   <Info
-                    size={10}
+                    size={12}
                     className="text-gray-600 dark:text-gray-400"
                   />
                 </div>
@@ -45,28 +45,28 @@ export function StatusField() {
                 className="p-0 border-0 bg-transparent shadow-none"
                 sideOffset={8}
               >
-                <div className="bg-gray-900 border border-gray-700 rounded-lg shadow-2xl p-4 min-w-[280px] max-w-[320px]">
+                <div className="bg-muted border rounded-lg shadow-2xl p-4 min-w-[280px] max-w-[320px]">
                   <div className="space-y-3">
                     <div className="flex items-center gap-3 py-2">
-                      <div className="w-6 h-6 rounded-md bg-gray-800 flex items-center justify-center">
-                        <Send size={12} className="text-yellow-400" />
+                      <div className="w-6 h-6 rounded-md flex items-center justify-center">
+                        <Send size={15} className="text-yellow-300" />
                       </div>
                       <div className="flex-1">
-                        <div className="text-white text-sm font-medium">
+                        <div className="text-sm font-medium text-primary">
                           Skickat
                         </div>
-                        <div className="text-gray-400 text-xs">
+                        <div className="text-muted-foreground text-xs">
                           Ansökan är skickad
                         </div>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-3 py-2">
-                      <div className="w-6 h-6 rounded-md bg-gray-800 flex items-center justify-center">
-                        <MessageSquare size={12} className="text-blue-400" />
+                      <div className="w-6 h-6 rounded-md flex items-center justify-center">
+                        <MessageSquare size={15} className="text-blue-400" />
                       </div>
                       <div className="flex-1">
-                        <div className="text-white text-sm font-medium">
+                        <div className="text-primary text-sm font-medium">
                           Besvarat
                         </div>
                         <div className="text-gray-400 text-xs">
@@ -76,11 +76,11 @@ export function StatusField() {
                     </div>
 
                     <div className="flex items-center gap-3 py-2">
-                      <div className="w-6 h-6 rounded-md bg-gray-800 flex items-center justify-center">
-                        <UserCheck size={12} className="text-green-400" />
+                      <div className="w-6 h-6 rounded-md flex items-center justify-center">
+                        <UserRoundCheck size={15} className="text-green-400" />
                       </div>
                       <div className="flex-1">
-                        <div className="text-white text-sm font-medium">
+                        <div className="text-primary text-sm font-medium">
                           Antagen
                         </div>
                         <div className="text-gray-400 text-xs">
@@ -96,13 +96,13 @@ export function StatusField() {
         </div>
       </Label>
       <Select name="status">
-        <SelectTrigger className="h-11 border-muted-foreground/20 focus:border-amber-500 bg-background/50">
+        <SelectTrigger className="h-11 border-muted-foreground/20 bg-background/50">
           <SelectValue placeholder="Välj status" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="skickat">
             <div className="flex items-center gap-2">
-              <Send size={14} className="text-yellow-600" />
+              <Send size={14} className="text-yellow-300" />
               Skickat
             </div>
           </SelectItem>
@@ -114,7 +114,7 @@ export function StatusField() {
           </SelectItem>
           <SelectItem value="antagen">
             <div className="flex items-center gap-2">
-              <UserCheck size={14} className="text-green-600" />
+              <UserRoundCheck size={14} className="text-green-600" />
               Antagen
             </div>
           </SelectItem>

@@ -11,7 +11,7 @@ import {
   MoreHorizontal,
   Send,
   MessageSquare,
-  UserCheck,
+  UserRoundCheck,
   Trash2,
 } from "lucide-react";
 
@@ -50,8 +50,8 @@ export function ActionMenu({
           disabled={currentStatus === "skickat"}
           className="flex items-center gap-2"
         >
-          <Send size={14} className="text-yellow-600" />
-          Markera som skickat
+          <Send size={14} className="text-yellow-300" />
+          Markera som Skickat
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -60,7 +60,7 @@ export function ActionMenu({
           className="flex items-center gap-2"
         >
           <MessageSquare size={14} className="text-blue-600" />
-          Markera som besvarat
+          Markera som Besvarat
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -68,8 +68,8 @@ export function ActionMenu({
           disabled={currentStatus === "antagen"}
           className="flex items-center gap-2"
         >
-          <UserCheck size={14} className="text-green-600" />
-          Markera som antagen
+          <UserRoundCheck size={14} className="text-green-600" />
+          Markera som Antagen
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
@@ -77,7 +77,7 @@ export function ActionMenu({
         {/* Ta bort */}
         <DropdownMenuItem
           onClick={onDelete}
-          className="flex items-center gap-2 text-red-600 focus:text-red-600"
+          className="flex items-center gap-2 text-destructive focus:text-destructive"
         >
           <Trash2 size={14} />
           Ta bort ansökan
