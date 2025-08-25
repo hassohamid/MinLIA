@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MinLIA 🎯
 
-## Getting Started
+**En modern webbapplikation för att organisera och följa upp dina LIA-ansökningar**
 
-First, run the development server:
+_Utvecklad med ❤️ av studenter för studenter_
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🎯 Vad är MinLIA?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+MinLIA är den ultimata lösningen för studenter som söker LIA-platser (Lärande i Arbete). Under praktikprocessen skickar man ansökningar till otaliga företag, och det kan snabbt bli rörigt att hålla koll på allt. Vår plattform hjälper dig att:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Organisera** alla dina ansökningar på ett ställe
+- **Följa upp** status för varje ansökan
+- **Undvika** att skicka dubbletter till samma företag
+- **Analysera** dina ansökningsmönster
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚫 Varför inte Excel eller Word?
 
-## Learn More
+Vi vet att många studenter försöker hålla koll på sina ansökningar med Excel-ark eller Word-dokument. Men låt oss vara ärliga - det fungerar inte! Med MinLIA får du:
 
-To learn more about Next.js, take a look at the following resources:
+✅ **Smidig användarupplevelse** - Inget krångel med formatering eller formler  
+✅ **Automatisk synkronisering** - Tillgång från vilken enhet som helst  
+✅ **Smart filtrering** - Hitta snabbt vad du letar efter  
+✅ **Visuell översikt** - Se din progress med en ögonkast  
+✅ **Säkert & pålitligt** - Ingen risk att förlora dina data
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 👥 Vem är det här för?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Yrkeshögskolestudenter** som behöver hitta praktikplatser
 
-## Deploy on Vercel
+**Alla studenter** som vill ha en professionell approach till sin praktikansökan
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ✨ Huvudfunktioner
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 📝 Enkel registrering av ansökningar
+
+- Lägg till företag, roll och ansökningsdatum
+- Håll koll på status: Skickat, Besvarat, Antagen
+- Markera dina toppval
+
+### 🔍 Smart filtrering och sökning
+
+- Filtrera på status, favoriter eller sökord
+- Sortera efter företag, datum eller andra kriterier
+
+### 📊 Översikt och statistik
+
+- Se totalt antal ansökningar
+- Följ hur många företag som har svarat
+- Få en tydlig bild av din ansökningsprocess
+
+### 💫 Användarupplevelse i fokus
+
+- Intuitivt gränssnitt designat för studenter
+- Responsiv design som fungerar på mobil och desktop
+- Snabba och smidiga interaktioner
+
+## 🛠️ Teknik bakom kulisserna
+
+Byggd med modern webbteknologi för bästa prestanda:
+
+- **Next.js 14** - För snabb och skalbar webbapplikation
+- **TypeScript** - För säker och underhållbar kod
+- **Supabase** - För databas och autentisering
+- **Tailwind CSS** - För responsiv och modern design
+
+## 🚀 Kom igång
+
+1. **Besök** [MinLIA](https://minlia.se)
+2. **Registrera** dig med din e-post
+3. **Lägg till** din första ansökan
+4. **Börja** organisera din LIA-process som en proffs!
+
+## 👨‍💻 Skaparna
+
+MinLIA utvecklades av två studenter som genomgår LIA-processen just nu:
+
+**[Hasso](https://www.linkedin.com/in/hassohamid/)** - Fullstack-utvecklare  
+**[Max](https://www.linkedin.com/in/maxnordin/)** - Fullstack-utvecklare
+
+_Vi byggde det verktyg vi behövde för vår egen ansökningsprocess! När vi började söka LIA-platser insåg vi snabbt att det skulle bli många ansökningar att hålla koll på, så vi skapade MinLIA för att dokumentera och organisera alla företag vi söker till._
+
+## 💬 Feedback och förslag
+
+Har du idéer för nya funktioner eller feedback på hur vi kan förbättra MinLIA? Vi älskar att höra från användare! Kontakta oss gärna via LinkedIn för förslag på förbättringar.
+
+## 🎯 Vision
+
+Vår vision är att göra LIA-processen mindre stressig och mer organiserad för alla svenska studenter. Vi vill att varje student ska känna sig trygg och ha full kontroll över sin praktikansökan.
+
+---
+
+**Ett verktyg skapat för att förenkla din LIA-process** ✨
