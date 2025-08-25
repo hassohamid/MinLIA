@@ -9,7 +9,13 @@ import { createApplication } from "@/lib/api";
 import { capitalizeFirst } from "@/components/applications/list/utils";
 import type { ApplicationFormData } from "./types";
 
-export default function FormBody({ isToggled }: { isToggled: boolean }) {
+export default function FormBody({
+  isToggled,
+  onToggle,
+}: {
+  isToggled: boolean;
+  onToggle?: () => void;
+}) {
   async function handleSubmit(formData: FormData) {
     const raw = Object.fromEntries(formData.entries());
 
@@ -19,8 +25,21 @@ export default function FormBody({ isToggled }: { isToggled: boolean }) {
       status: raw.status as "skickat" | "antagen" | "besvarat",
       applied_date: raw.applied_date as string,
     };
+
+    // Validate status is selected
+    if (!data.status) {
+      // You can add a toast error here if needed
+      console.error("Status must be selected");
+      return;
+    }
+
     const result = await createApplication(data);
-    if (!result.success) {
+    if (result.success) {
+      // Minimize the form after successful submission
+      if (onToggle) {
+        onToggle();
+      }
+    } else {
       if (result.type === "VALIDATION_ERROR") {
         console.error(result.error, result.issues);
       }

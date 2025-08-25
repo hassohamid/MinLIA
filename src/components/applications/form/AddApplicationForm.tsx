@@ -14,7 +14,7 @@ export default function AddApplicationForm() {
         <FormHeader isToggled={isToggled} onToggle={handleToggle} />
       </CardHeader>
 
-      <FormBody isToggled={isToggled} />
+      <FormBody isToggled={isToggled} onToggle={handleToggle} />
     </Card>
   );
 }
