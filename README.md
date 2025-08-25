@@ -6,7 +6,7 @@ _Utvecklad med ❤️ av studenter för studenter_
 
 ## 🎯 Vad är MinLIA?
 
-MinLIA är den ultimata lösningen för studenter som söker LIA-platser (Lärande i Arbete). Under praktikprocessen skickar man ansökningar till otaliga företag, och det kan snabbt bli rörigt att hålla koll på allt. Vår plattform hjälper dig att:
+MinLIA är en lösning för studenter som söker LIA-platser (Lärande i Arbete). Under praktikprocessen skickar man ansökningar till flera företag, och det kan snabbt bli rörigt att hålla koll på allt. Vår plattform hjälper dig att:
 
 - **Organisera** alla dina ansökningar på ett ställe
 - **Följa upp** status för varje ansökan
@@ -65,7 +65,7 @@ Byggd med modern webbteknologi för bästa prestanda:
 
 ## 🚀 Kom igång
 
-1. **Besök** [MinLIA](https://minlia.se)
+1. **Besök** [MinLIA](https://minlia.vercel.app/)
 2. **Registrera** dig med din e-post
 3. **Lägg till** din första ansökan
 4. **Börja** organisera din LIA-process som en proffs!
