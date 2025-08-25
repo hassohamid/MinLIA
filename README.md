@@ -65,7 +65,7 @@ Byggd med modern webbteknologi för bästa prestanda:
 
 ## 🚀 Kom igång
 
-1. **Besök** [MinLIA](https://minlia.vercel.app/)
+1. **Besök** [MinLIA](https://minlia.se/)
 2. **Registrera** dig med din e-post
 3. **Lägg till** din första ansökan
 4. **Börja** organisera din LIA-process som en proffs!
