@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, ChevronDown, ChevronUp } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
+import type { User } from "@supabase/supabase-js";
 
 interface FormHeaderProps {
   isToggled: boolean;
@@ -11,7 +12,7 @@ interface FormHeaderProps {
 }
 
 export default function FormHeader({ isToggled, onToggle }: FormHeaderProps) {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
