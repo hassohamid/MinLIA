@@ -10,7 +10,7 @@ export function useFormSubmission() {
       if (result?.url) {
         window.location.href = result.url;
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error("Google sign-in failed:", err);
     }
   };
