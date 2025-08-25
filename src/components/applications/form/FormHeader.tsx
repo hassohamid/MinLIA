@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Plus, ChevronDown, ChevronUp } from "lucide-react";
 
@@ -6,7 +8,7 @@ interface FormHeaderProps {
   onToggle: () => void;
 }
 
-export function FormHeader({ isToggled, onToggle }: FormHeaderProps) {
+export default function FormHeader({ isToggled, onToggle }: FormHeaderProps) {
   return (
     <Button
       variant="ghost"

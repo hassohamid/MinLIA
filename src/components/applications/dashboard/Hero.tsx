@@ -1,22 +1,17 @@
-"use client";
 import { WelcomeSection } from "./WelcomeSection";
 import { StatsCard } from "./StatsCard";
-import { useAuth } from "./hooks/useAuth";
-import { useStats } from "./hooks/useStats";
+import { getStats } from "./getStats";
 import type { Application } from "@/types";
+import { getUser } from "@/lib/supabase/server";
 
-interface HeroProps {
-  applications: Application[];
-}
-
-export function Hero({ applications }: HeroProps) {
-  const { user, authLoading } = useAuth();
-  const stats = useStats(applications);
+export async function Hero({ applications }: { applications: Application[] }) {
+  const user = await getUser();
+  const stats = getStats(applications);
 
   return (
     <div className="flex justify-between gap-2 pt-10 relative">
-      <WelcomeSection user={user} authLoading={authLoading} />
-      <StatsCard stats={stats} user={user} authLoading={authLoading} />
+      <WelcomeSection user={user} />
+      <StatsCard stats={stats} user={user} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Send, UserCheck, MessageSquare } from "lucide-react";
 
 interface StatusBadgeProps {
-  status: string;
+  status: "skickat" | "antagen" | "besvarat";
 }
 
 export function StatusBadge({ status }: StatusBadgeProps) {
@@ -37,7 +37,5 @@ export function StatusBadge({ status }: StatusBadgeProps) {
           Besvarat
         </Badge>
       );
-    default:
-      return <Badge variant="outline">Okänd</Badge>;
   }
 }

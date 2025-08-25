@@ -1,12 +1,7 @@
 import { Bookmark, MousePointer2, Heart } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 
-interface WelcomeSectionProps {
-  user: User | null;
-  authLoading: boolean;
-}
-
-export function WelcomeSection({ user, authLoading }: WelcomeSectionProps) {
+export function WelcomeSection({ user }: { user: User | null }) {
   return (
     <div className="p-6 mt-10 border-l-4 border-blue-700 rounded-xl relative">
       <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
@@ -24,9 +19,7 @@ export function WelcomeSection({ user, authLoading }: WelcomeSectionProps) {
         <div className="flex items-center gap-2 text-amber-600">
           <MousePointer2 size={18} className="fill-current" />
           <span className="text-sm font-medium">
-            {authLoading
-              ? "Laddar..."
-              : user
+            {user
               ? "Bättre än Excel eller Word-dokument"
               : "Ett klick för att registrera dig"}
           </span>

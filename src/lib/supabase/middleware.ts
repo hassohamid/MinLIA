@@ -39,9 +39,7 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // console.log("👤 User in middleware:", user ?? "No user");
-
-  const publicRoutes = ["/", "/about", "/contact"];
+  const publicRoutes = ["/"];
   if (
     !user &&
     !request.nextUrl.pathname.startsWith("/auth") &&

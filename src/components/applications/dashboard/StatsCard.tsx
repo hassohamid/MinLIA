@@ -6,10 +6,9 @@ import type { User } from "@supabase/supabase-js";
 interface StatsCardProps {
   stats: StatsData;
   user: User | null;
-  authLoading: boolean;
 }
 
-export function StatsCard({ stats, user, authLoading }: StatsCardProps) {
+export function StatsCard({ stats, user }: StatsCardProps) {
   const statsItems = [
     {
       icon: FileText,
@@ -50,14 +49,11 @@ export function StatsCard({ stats, user, authLoading }: StatsCardProps) {
           </div>
         ))}
 
-        {/* Overlay for non-logged in users */}
         {!user && (
           <div className="absolute inset-0 bg-background/95 backdrop-blur-md rounded-lg flex items-center justify-center">
             <div className="text-center p-4">
               <span className="text-sm font-medium text-muted-foreground">
-                {authLoading
-                  ? "Laddar..."
-                  : "Logga in för att se din statistik"}
+                Logga in för att se din statistik
               </span>
             </div>
           </div>

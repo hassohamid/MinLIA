@@ -19,9 +19,8 @@ import {
   MessageSquare,
   Info,
 } from "lucide-react";
-import type { FormFieldProps } from "../types";
 
-export function StatusField({ value, onChange }: FormFieldProps) {
+export function StatusField() {
   return (
     <div className="space-y-3 group">
       <Label
@@ -96,10 +95,7 @@ export function StatusField({ value, onChange }: FormFieldProps) {
           </TooltipProvider>
         </div>
       </Label>
-      <Select
-        value={value}
-        onValueChange={(value) => onChange("status", value)}
-      >
+      <Select name="status">
         <SelectTrigger className="h-11 border-muted-foreground/20 focus:border-amber-500 bg-background/50">
           <SelectValue placeholder="Välj status" />
         </SelectTrigger>
