@@ -1,6 +1,6 @@
 "use server";
 
-import type { ApplicationFormProps } from "@/components/applications/form";
+import type { ApplicationFormData } from "@/components/applications/form/types";
 import { z, ZodError } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
@@ -14,7 +14,7 @@ const ApplicationSchema = z.object({
   applied_date: z.iso.date(),
 });
 
-export async function createApplication(data: ApplicationFormProps) {
+export async function createApplication(data: ApplicationFormData) {
   try {
     const supabase = await createClient();
 
