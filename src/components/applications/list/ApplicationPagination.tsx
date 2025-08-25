@@ -51,8 +51,8 @@ export function ApplicationPagination({
                   isActive={currentPage === page}
                   className={`cursor-pointer transition-all duration-200 ${
                     currentPage === page
-                      ? "bg-foreground text-white shadow-sm scale-105 hover:bg-foreground/90"
-                      : "hover:bg-muted hover:text-foreground hover:scale-105"
+                      ? "bg-foreground dark:bg-neutral-600  text-white  shadow-sm scale-105 dark:hover:bg-neutral-500 hover:bg-foreground/90 hover:text-white"
+                      : "hover:bg-muted  hover:text-foreground hover:scale-105"
                   }`}
                 >
                   {page}
