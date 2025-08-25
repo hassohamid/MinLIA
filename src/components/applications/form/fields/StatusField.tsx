@@ -21,9 +21,7 @@ import {
 } from "lucide-react";
 import type { FormFieldProps } from "../types";
 
-interface StatusFieldProps extends FormFieldProps {}
-
-export function StatusField({ value, onChange }: StatusFieldProps) {
+export function StatusField({ value, onChange }: FormFieldProps) {
   return (
     <div className="space-y-3 group">
       <Label

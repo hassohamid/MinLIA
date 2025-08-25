@@ -1,3 +1,5 @@
+import type { User } from "@supabase/supabase-js";
+
 export interface ApplicationFormData {
   company: string;
   role: string;
@@ -11,7 +13,7 @@ export interface FormFieldProps {
 }
 
 export interface AuthState {
-  user: any | null;
+  user: User | null;
   authLoading: boolean;
 }
 

@@ -3,9 +3,7 @@ import { Label } from "@/components/ui/label";
 import { Calendar } from "lucide-react";
 import type { FormFieldProps } from "../types";
 
-interface DateFieldProps extends FormFieldProps {}
-
-export function DateField({ value, onChange }: DateFieldProps) {
+export function DateField({ value, onChange }: FormFieldProps) {
   return (
     <div className="space-y-3 group">
       <Label

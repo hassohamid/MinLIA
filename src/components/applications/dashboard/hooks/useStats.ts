@@ -6,9 +6,6 @@ export function useStats(applications: Application[]): StatsData {
   const answeredApplications = applications.filter(
     (app) => app.status === "besvarat"
   ).length;
-  const acceptedApplications = applications.filter(
-    (app) => app.status === "antagen"
-  ).length;
   const responseRate =
     totalApplications > 0
       ? Math.round((answeredApplications / totalApplications) * 100)
@@ -17,7 +14,6 @@ export function useStats(applications: Application[]): StatsData {
   return {
     totalApplications,
     answeredApplications,
-    acceptedApplications,
     responseRate,
   };
 }

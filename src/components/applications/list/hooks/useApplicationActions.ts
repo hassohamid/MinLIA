@@ -44,7 +44,7 @@ export function useApplicationActions({
           duration: 3000,
         });
       }
-    } catch (error) {
+    } catch {
       toast.error("Något gick fel", {
         description: "Kunde inte uppdatera favoriter. Försök igen.",
         duration: 4000,
@@ -94,7 +94,7 @@ export function useApplicationActions({
           });
         }
       }
-    } catch (error) {
+    } catch {
       toast.error("Kunde inte uppdatera status", {
         description: "Något gick fel. Försök igen senare.",
         duration: 4000,
@@ -120,7 +120,7 @@ export function useApplicationActions({
 
         setDeleteDialogOpen(false);
         setApplicationToDelete(null);
-      } catch (error) {
+      } catch {
         toast.error("Kunde inte ta bort ansökan", {
           description: "Något gick fel. Försök igen senare.",
           duration: 4000,

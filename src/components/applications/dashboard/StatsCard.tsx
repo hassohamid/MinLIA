@@ -1,10 +1,11 @@
 import { Card } from "@/components/ui/card";
 import { FileText, CheckCircle, ChartColumnDecreasing } from "lucide-react";
 import type { StatsData } from "./types";
+import type { User } from "@supabase/supabase-js";
 
 interface StatsCardProps {
   stats: StatsData;
-  user: any | null;
+  user: User | null;
   authLoading: boolean;
 }
 

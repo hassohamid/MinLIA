@@ -1,7 +1,8 @@
 import { Bookmark, MousePointer2, Heart } from "lucide-react";
+import type { User } from "@supabase/supabase-js";
 
 interface WelcomeSectionProps {
-  user: any | null;
+  user: User | null;
   authLoading: boolean;
 }
 

@@ -1,6 +1,7 @@
 import { createApplication } from "@/lib/api";
 import { signInWithGoogle } from "@/lib/auth-actions";
 import type { ApplicationFormData } from "../types";
+import type { User } from "@supabase/supabase-js";
 
 export function useFormSubmission() {
   const handleAuthRequired = async () => {
@@ -16,7 +17,7 @@ export function useFormSubmission() {
 
   const submitForm = async (
     formData: ApplicationFormData,
-    user: any,
+    user: User | null,
     setIsLoading: (loading: boolean) => void,
     resetForm: () => void
   ) => {

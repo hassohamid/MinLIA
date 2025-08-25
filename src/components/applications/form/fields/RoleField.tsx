@@ -3,9 +3,7 @@ import { Label } from "@/components/ui/label";
 import { User } from "lucide-react";
 import type { FormFieldProps } from "../types";
 
-interface RoleFieldProps extends FormFieldProps {}
-
-export function RoleField({ value, onChange }: RoleFieldProps) {
+export function RoleField({ value, onChange }: FormFieldProps) {
   return (
     <div className="space-y-3 group">
       <Label
