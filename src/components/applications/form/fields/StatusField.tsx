@@ -95,7 +95,7 @@ export function StatusField() {
           </TooltipProvider>
         </div>
       </Label>
-      <Select name="status">
+      <Select name="status" required>
         <SelectTrigger className="h-11 border-muted-foreground/20 bg-background/50">
           <SelectValue placeholder="Välj status" />
         </SelectTrigger>
