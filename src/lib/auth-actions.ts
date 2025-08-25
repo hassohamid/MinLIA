@@ -14,7 +14,6 @@ export async function logout() {
 export async function signInWithGoogle(
   origin: string
 ): Promise<{ error?: string; url?: string }> {
-  console.log("running");
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
@@ -23,7 +22,7 @@ export async function signInWithGoogle(
     },
   });
   if (error) {
-    console.log(error);
+    console.error(error);
     throw new Error(error.message);
   }
 

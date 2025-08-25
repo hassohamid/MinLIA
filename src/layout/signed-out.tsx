@@ -7,6 +7,7 @@ export default function SignedOut() {
   async function handleSignIn() {
     try {
       const result = await signInWithGoogle(window.location.origin);
+
       if (result?.url) {
         window.location.href = result.url;
       }

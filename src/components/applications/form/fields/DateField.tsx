@@ -1,9 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "lucide-react";
-import type { FormFieldProps } from "../types";
 
-export function DateField({ value, onChange }: FormFieldProps) {
+export function DateField() {
   return (
     <div className="space-y-3 group">
       <Label
@@ -16,9 +15,8 @@ export function DateField({ value, onChange }: FormFieldProps) {
       <Input
         id="applied_date"
         type="date"
-        value={value}
+        name="applied_date"
         max={new Date().toISOString().split("T")[0]}
-        onChange={(e) => onChange("applied_date", e.target.value)}
         className="h-11 border-muted-foreground/20 focus:border-green-500 transition-colors bg-background/50"
         required
       />
