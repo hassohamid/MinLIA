@@ -75,7 +75,7 @@ export default function FormHeader({ isToggled, onToggle }: FormHeaderProps) {
         <div className="text-left">
           <span className="font-medium">Lägg till ny ansökan</span>
           <p className="text-xs text-muted-foreground">
-            Spåra din nästa LIA-möjlighet
+            Håll koll på dina ansökningar
           </p>
         </div>
       </div>
