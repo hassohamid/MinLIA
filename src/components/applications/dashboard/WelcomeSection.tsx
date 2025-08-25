@@ -7,7 +7,7 @@ export function WelcomeSection({ user }: { user: User | null }) {
       <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
         Din LIA-koll<span className="text-green-300">.</span>
       </h1>
-      <h2 className="text-muted-foreground font-medium text-[13px] sm:text-sm">
+      <h2 className="text-muted-foreground font-medium text-[12px] sm:text-sm">
         Samla och följ dina LIA-ansökningar på ett ställe.
       </h2>
 
