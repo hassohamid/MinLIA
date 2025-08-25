@@ -2,6 +2,13 @@ import { getUser } from "@/lib/supabase/server";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Mail, Construction } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "MinLIA | Profil",
+  description:
+    "Hantera dina profilinställningar och se din LIA-statistik i MinLIA.",
+};
 
 export default async function ProfilePage() {
   const user = await getUser();

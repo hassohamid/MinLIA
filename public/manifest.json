@@ -1,0 +1,22 @@
+{
+  "name": "MinLIA | Organisera dina LIA-ansökningar",
+  "short_name": "MinLIA",
+  "description": "Anteckna alla företag du söker LIA till. Håll koll på vilka som svarat, analysera din process och markera dina toppval. Utvecklad av studenter för studenter.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "education", "utilities"],
+  "lang": "sv",
+  "scope": "/",
+  "id": "minlia-app"
+}

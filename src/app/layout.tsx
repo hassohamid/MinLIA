@@ -17,9 +17,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MinLIA - Håll dig organiserad",
+  title: "MinLIA | Organisera dina LIA-ansökningar",
   description:
-    "MinLIA hjälper dig att organisera LIA-praktik med uppgifter, anteckningar och dokument på ett enkelt sätt.",
+    "Anteckna alla företag du söker LIA till. Håll koll på vilka som svarat, analysera din process och markera dina toppval. Utvecklad av studenter för studenter.",
+
   icons: {
     icon: [
       {
@@ -29,6 +30,44 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.svg",
     apple: "/favicon.svg",
+  },
+
+  // Open Graph för delning (WhatsApp, Facebook, etc.)
+  openGraph: {
+    title: "MinLIA | Organisera dina LIA-ansökningar",
+    description:
+      "Anteckna alla företag du söker LIA till. Håll koll på vilka som svarat, analysera din process och markera dina toppval. Utvecklad av studenter för studenter.",
+    url: "https://minlia.vercel.app",
+    siteName: "MinLIA",
+    images: [
+      {
+        url: "/favicon.svg",
+        width: 1200,
+        height: 630,
+        alt: "MinLIA | Organisera dina LIA-ansökningar",
+      },
+    ],
+    locale: "sv_SE",
+    type: "website",
+  },
+
+  // Twitter Cards
+  twitter: {
+    card: "summary_large_image",
+    title: "MinLIA | Organisera dina LIA-ansökningar",
+    description:
+      "Anteckna alla företag du söker LIA till. Håll koll på vilka som svarat, analysera din process och markera dina toppval.",
+    images: ["/favicon.svg"],
+  },
+
+  // PWA metadata
+  manifest: "/manifest.json",
+
+  // Viewport och andra mobil-optimeringar
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
   },
 };
 
