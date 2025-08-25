@@ -1,6 +1,6 @@
 import { AddApplicationForm } from "@/components/applications/form";
 import Hero from "@/components/applications/hero";
-import ApplicationList from "@/components/applications/list";
+import ApplicationList from "@/components/applications/list/ApplicationList";
 import { getApplications } from "@/lib/api";
 
 export default async function Home() {
