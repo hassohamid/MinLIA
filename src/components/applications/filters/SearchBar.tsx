@@ -9,7 +9,7 @@ interface SearchBarProps {
   placeholder?: string;
 }
 
-export default function SearchBar({
+export function SearchBar({
   value,
   onChange,
   placeholder = "Sök ansökningar...",

@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import type { Application } from "../../types";
+import type { Application } from "@/types";
 
 interface UseApplicationFiltersProps {
   applications: Application[];

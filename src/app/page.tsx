@@ -1,5 +1,5 @@
 import { AddApplicationForm } from "@/components/applications/form";
-import Hero from "@/components/applications/hero";
+import { Hero } from "@/components/applications/dashboard/Hero";
 import ApplicationList from "@/components/applications/list/ApplicationList";
 import { getApplications } from "@/lib/api";
 

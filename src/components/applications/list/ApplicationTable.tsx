@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/table";
 import { Building2, User, Calendar } from "lucide-react";
 import { ApplicationRow } from "./ApplicationRow";
-import type { Application } from "../types";
+import type { Application } from "@/types";
 
 interface ApplicationTableProps {
   applications: Application[];

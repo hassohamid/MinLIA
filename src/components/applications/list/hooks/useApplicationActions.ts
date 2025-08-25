@@ -5,7 +5,7 @@ import {
   toggleApplicationFavorite,
   deleteApplication,
 } from "@/lib/api";
-import type { Application } from "../../types";
+import type { Application } from "@/types";
 
 interface UseApplicationActionsProps {
   applications: Application[];

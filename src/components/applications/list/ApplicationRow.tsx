@@ -3,7 +3,7 @@ import { StatusBadge } from "./StatusBadge";
 import { FavoriteButton } from "./FavoriteButton";
 import { ActionMenu } from "./ActionMenu";
 import { capitalizeFirst } from "./utils";
-import type { Application } from "../types";
+import type { Application } from "@/types";
 
 interface ApplicationRowProps {
   application: Application;

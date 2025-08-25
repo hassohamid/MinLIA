@@ -1,6 +1,6 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
-import FilterBar from "../filter-bar";
+import { FilterBar } from "../filters";
 import { ApplicationTable } from "./ApplicationTable";
 import { DeleteDialog } from "./DeleteDialog";
 import { EmptyState } from "./EmptyState";
@@ -10,7 +10,7 @@ import { useApplicationFilters } from "./hooks/useApplicationFilters";
 import { usePagination } from "./hooks/usePagination";
 import { useHeartAnimations } from "./hooks/useHeartAnimations";
 import { useApplicationActions } from "./hooks/useApplicationActions";
-import type { Application } from "../types";
+import type { Application } from "@/types";
 
 interface ApplicationListProps {
   applications: Application[];
