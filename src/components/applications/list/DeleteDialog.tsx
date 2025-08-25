@@ -28,16 +28,20 @@ export function DeleteDialog({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Trash2 size={20} className="text-red-500" />
             Ta bort ansökan
           </DialogTitle>
           <DialogDescription>
             Är du säker på att du vill ta bort ansökningen till{" "}
-            <span className="font-semibold">{application?.company}</span> för
-            rollen <span className="font-semibold">{application?.role}</span>?
+            <span className="font-semibold">{application?.company} </span>
+            {application?.role && (
+              <>
+                för rollen
+                <span className="font-semibold"> {application?.role}</span>
+              </>
+            )}
             <br />
             <br />
-            <span className="text-red-600 text-sm">
+            <span className="text-destructive text-sm">
               Denna åtgärd kan inte ångras.
             </span>
           </DialogDescription>
@@ -55,7 +59,7 @@ export function DeleteDialog({
             onClick={onConfirm}
             className="w-full sm:w-auto"
           >
-            <Trash2 size={16} className="mr-2" />
+            <Trash2 size={16} />
             Ta bort
           </Button>
         </DialogFooter>

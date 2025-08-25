@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Send, UserCheck, MessageSquare, Filter } from "lucide-react";
+import { Send, UserRoundCheck, MessageSquare, Filter } from "lucide-react";
 import type { StatusType } from "./types";
 
 interface StatusFilterProps {
@@ -18,7 +18,7 @@ export function StatusFilter({
       label: "Skickat",
       colors: {
         active:
-          "bg-yellow-50 text-yellow-700 hover:bg-yellow-100 dark:bg-yellow-900/20 dark:text-yellow-400",
+          "bg-yellow-50 text-yellow-900 hover:bg-yellow-100 dark:bg-yellow-900/20 dark:text-yellow-400",
         inactive: "hover:bg-muted text-muted-foreground hover:text-foreground",
       },
     },
@@ -34,7 +34,7 @@ export function StatusFilter({
     },
     {
       value: "antagen" as StatusType,
-      icon: UserCheck,
+      icon: UserRoundCheck,
       label: "Antagen",
       colors: {
         active:

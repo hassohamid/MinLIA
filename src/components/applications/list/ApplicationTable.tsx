@@ -5,7 +5,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Building2, User, Calendar } from "lucide-react";
+import { Building2, UserRound, Calendar } from "lucide-react";
 import { ApplicationRow } from "./ApplicationRow";
 import type { Application } from "@/types";
 
@@ -39,7 +39,7 @@ export function ApplicationTable({
             </TableHead>
             <TableHead className="hidden md:table-cell h-12 font-semibold text-foreground/80">
               <div className="flex items-center gap-2">
-                <User size={16} className="text-purple-600" />
+                <UserRound size={16} className="text-purple-600" />
                 Roll
               </div>
             </TableHead>
@@ -52,8 +52,8 @@ export function ApplicationTable({
             <TableHead className="h-12 font-semibold text-foreground/80">
               <div className="flex items-center gap-2">
                 <div className="relative">
-                  <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                  <div className="absolute inset-0 w-3 h-3 bg-orange-500 rounded-full animate-ping opacity-75"></div>
+                  <div className="w-3 h-3 bg-yellow-300 rounded-full"></div>
+                  <div className="absolute inset-0 w-3 h-3 bg-yellow-300 rounded-full animate-ping opacity-75"></div>
                 </div>
                 Status
               </div>
