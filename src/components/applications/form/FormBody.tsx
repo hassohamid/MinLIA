@@ -6,6 +6,7 @@ import { RoleField } from "./fields/RoleField";
 import { StatusField } from "./fields/StatusField";
 import { SubmitButton } from "./SubmitButton";
 import { createApplication } from "@/lib/api";
+import { capitalizeFirst } from "@/components/applications/list/utils";
 import type { ApplicationFormData } from "./types";
 
 export default function FormBody({ isToggled }: { isToggled: boolean }) {
@@ -13,8 +14,8 @@ export default function FormBody({ isToggled }: { isToggled: boolean }) {
     const raw = Object.fromEntries(formData.entries());
 
     const data: ApplicationFormData = {
-      company: raw.company as string,
-      role: raw.role as string,
+      company: capitalizeFirst(raw.company as string),
+      role: capitalizeFirst(raw.role as string),
       status: raw.status as "skickat" | "antagen" | "besvarat",
       applied_date: raw.applied_date as string,
     };
